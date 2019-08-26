@@ -1,0 +1,485 @@
+﻿<html>
+
+
+
+<head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta name="keywords" content="Oracle DBA, RAC, ASM, DataGuard"/>
+	<meta name="description" content="Администрирование и разработка баз данных Oracle"/>
+
+		<title>Oracle DBA</title>
+
+		 <link rel="stylesheet" href="http://prev.oracle-dba.ru/install/business-intelligence/hb.css" type="text/css">
+		 <link rel="stylesheet" href="http://prev.oracle-dba.ru/install/business-intelligence/html.css" type="text/css">
+
+
+
+                  <link rel="stylesheet" href="../../css/bootstrap.css">
+                  <link rel="stylesheet" href="../../css/app.css">
+
+
+
+				<style type="text/css">
+				   .text {
+
+					padding-left: 100px;
+					padding-right: 100px;
+
+				   }
+
+				   .link {
+
+					padding-left: 100px;
+					padding-right: 100px;
+
+				   }
+
+				</style>
+
+
+        <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'oracle-dba'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function () {
+            var s = document.createElement('script'); s.async = true;
+            s.type = 'text/javascript';
+            s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+        </script>
+
+
+
+<style type="text/css">
+ .spoiler_body {display:none; cursor:pointer;}
+</style>
+
+
+	</head>
+
+
+<body>
+
+
+
+
+<br/><br/>
+
+<div class="link">
+<table width="100%" border="0">
+<tr>
+<td align="left" width="40%">
+<a href="../../index.html"><img src="../../remote_oracle_dba.jpeg" border="0" alt="Oracle DBA"
+/></a>
+</td>
+
+
+<td align="center">
+<a href="../../chat.php.html">Заходи в WEBCHAT админов Oracle<br/>
+Здесь старый добрый IRC</a>
+</td>
+
+<td align="right" width="33%">
+<a href="../../job/remote_oracle_dba_on_project/index.html"><img src="../../remote-oracle-dba-services.jpg" border="0"
+alt="Remote Oracle DBA Services"
+height="" width="300px" /></a>
+</td>
+
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+
+
+<div id="cse" style="width: 100%;">Loading</div>
+<script src="http://www.google.ru/jsapi" type="text/javascript"></script>
+<script type="text/javascript">
+  google.load('search', '1', {language : 'ru', style : google.loader.themes.V2_DEFAULT});
+  google.setOnLoadCallback(function() {
+    var customSearchOptions = {};  var customSearchControl = new google.search.CustomSearchControl(
+      '006168197569183510807:fzridi5qcxw', customSearchOptions);
+    customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+    customSearchControl.draw('cse');
+  }, true);
+</script>
+
+
+<div align="center" style="color:red">
+Работа над этой версией сайта остановлена. Рекомендуется обратиться к новой версии сайта <a href="http://oracle-dba.ru">oracle-dba.ru</a> на котором в дальшейшем будут исправляться все ошибки и неточности.
+</div>
+
+<br/>
+
+<div align="center">
+<a href="../../sitemap.php.html">Карта сайта</a>
+</div>
+
+
+
+<br/><br/><br/>
+<h2>[Инсталляция Oracle Business Intelligence]</h2>
+
+<br/><br/>
+
+       <div class="linuxCommand">
+
+         	# mkdir -p /u01/app/oracle/oraclebi/11.1<br/>
+		# mkdir -p /u01/app/oracle/oraclebi/oraInventory<br/>
+		# chown -R oraclebi:oraclebi /u01/app/oracle/oraclebi<br/>
+		# chmod -R 775 /u01/app/oracle/oraclebi<br/><br/>
+
+		# mkdir -p /u02/oracle_bi_domains/bifoundation_domain<br/>
+		# chown -R oraclebi:oraclebi  /u02/oracle_bi_domains<br/>
+
+       </div>
+
+
+<br/><br/>
+
+Следующие пакеты должны быть установлены на OEL6:
+
+
+
+<br/><br/>
+
+       <div class="linuxCommand">
+
+         	# yum install -y \ <br/>
+		binutils.x86_64 \<br/>
+		compat-libcap1 \<br/>
+		list compat-libstdc++-33 \<br/>
+		gcc \<br/>
+		gcc-c++ \<br/>
+		glibc \<br/>
+		glibc-devel \<br/>
+		libaio \<br/>
+		libaio-devel \<br/>
+		libgcc \<br/>
+		libstdc++ \<br/>
+		libstdc++-devel \<br/>
+		libXext.i686 \<br/>
+		libXtst.i686 \<br/>
+		openmotif.x86_64 \<br/>
+		redhat-lsb-core.x86_64 \<br/>
+		openmotif-2.2.3.x86_64 \<br/>
+		openmotif22.x86_64 \<br/>
+		sysstat<br/>
+
+       </div>
+
+
+<br/><br/>
+
+
+
+
+# yum list binutils
+
+
+
+
+-- uln-internal-setup - Не нашел в стандартном репозитории, в остальных искать не стал.<br/>
+
+
+
+<br/><br/>
+
+
+Копирую на сервер в каталог /tmp/_oralce_bi 
+
+<br/><br/>
+
+bi_linux_x86_111170_64_disk1_1of2.zip<br/>
+bi_linux_x86_111170_64_disk1_2of2.zip<br/>
+bi_linux_x86_111170_64_disk2_1of2.zip<br/>
+bi_linux_x86_111170_64_disk2_2of2.zip<br/>
+bi_linux_x86_111170_64_disk3.zip
+
+<br/><br/>
+
+
+и разархивирую
+
+
+<br/><br/>
+
+       <div class="linuxCommand">
+
+         	$ unzip bi_linux_x86_111170_64_disk1_1of2.zip; \<br/>
+		bi_linux_x86_111170_64_disk1_2of2.zip; \<br/>
+		bi_linux_x86_111170_64_disk2_1of2.zip; \<br/>
+		bi_linux_x86_111170_64_disk2_2of2.zip; \<br/>
+		bi_linux_x86_111170_64_disk3.zip
+
+       </div>
+
+
+<br/><br/>
+
+Если не разархивировать все архивы, в процессе инсталляции появится сообщение с предложением указать источник нахождения нужных для инсталляции файлов.
+
+<br/><br/>
+
+<img src="http://img.oradba.net/img/oracle/middleware/oracle-bi/oracle-bi-installation/oracle-bi-installation-next-disk.png" alt="oracle bi installation"><br/><br/>
+
+
+
+<br/><br/>
+
+       <div class="linuxCommand">
+
+         	
+	$ cd bishiphome/Disk1/<br/>
+
+       </div>
+
+
+<br/><br/>
+
+
+
+       <div class="linuxCommand">
+
+         	
+	$ export DISPLAY=192.168.1.5:0.0<br/>
+
+       </div>
+
+
+<br/><br/>
+
+
+
+       <div class="linuxCommand">
+
+         	
+	$ ./runInstaller<br/>
+
+       </div>
+
+<br/><br/>
+
+
+<br/><img src="http://img.oradba.net/img/oracle/middleware/oracle-bi/oracle-bi-installation/oracle-bi-installation_01.png" alt="oracle bi installation"><br/><br/>
+
+<br/><img src="http://img.oradba.net/img/oracle/middleware/oracle-bi/oracle-bi-installation/oracle-bi-installation_02.png" alt="oracle bi installation"><br/><br/>
+
+
+
+<br/><br/>
+
+       <div class="linuxCommand">
+
+         	
+	# cd /u01/app/oracle/oraclebi/oraInventory/<br/>
+	# ./createCentralInventory.sh<br/>
+
+       </div>
+
+<br/><br/>
+
+Данные которые я вводил:<br/><br/>
+
+Oracle Middleware Home: /u01/app/oracle/oraclebi/11.1<br/>
+Domai Home Location: /u02/oracle_bi_domains/bifoundation_domain<br/>
+Oracle Instance Location: /u01/app/oracle/oraclebi/11.1/instance1<br/>
+Oracle Instance Name: Instance1<br/><br/>
+
+
+Connect String: oracle112:1521:ora112.localdomain<br/>
+BIPLATFORM Schema Username: dev_biplatform<br/><br/>
+
+MD5 Schema Username: dev_MDS
+
+<br/><br/>
+
+</pre>
+
+<br/><img src="http://img.oradba.net/img/oracle/middleware/oracle-bi/oracle-bi-installation/oracle-bi-installation_03.png" alt="oracle bi installation"><br/><br/>
+
+<br/><img src="http://img.oradba.net/img/oracle/middleware/oracle-bi/oracle-bi-installation/oracle-bi-installation_04.png" alt="oracle bi installation"><br/><br/>
+
+<br/><img src="http://img.oradba.net/img/oracle/middleware/oracle-bi/oracle-bi-installation/oracle-bi-installation_05.png" alt="oracle bi installation"><br/><br/>
+
+<br/><img src="http://img.oradba.net/img/oracle/middleware/oracle-bi/oracle-bi-installation/oracle-bi-installation_06.png" alt="oracle bi installation"><br/><br/>
+
+<br/><img src="http://img.oradba.net/img/oracle/middleware/oracle-bi/oracle-bi-installation/oracle-bi-installation_07.png" alt="oracle bi installation"><br/><br/>
+
+<br/><img src="http://img.oradba.net/img/oracle/middleware/oracle-bi/oracle-bi-installation/oracle-bi-installation_08.png" alt="oracle bi installation"><br/><br/>
+
+<br/><img src="http://img.oradba.net/img/oracle/middleware/oracle-bi/oracle-bi-installation/oracle-bi-installation_09.png" alt="oracle bi installation"><br/><br/>
+
+<br/><img src="http://img.oradba.net/img/oracle/middleware/oracle-bi/oracle-bi-installation/oracle-bi-installation_10.png" alt="oracle bi installation"><br/><br/>
+
+<br/><img src="http://img.oradba.net/img/oracle/middleware/oracle-bi/oracle-bi-installation/oracle-bi-installation_11.png" alt="oracle bi installation"><br/><br/>
+
+<br/><img src="http://img.oradba.net/img/oracle/middleware/oracle-bi/oracle-bi-installation/oracle-bi-installation_12.png" alt="oracle bi installation"><br/><br/>
+
+<br/><img src="http://img.oradba.net/img/oracle/middleware/oracle-bi/oracle-bi-installation/oracle-bi-installation_13.png" alt="oracle bi installation"><br/><br/>
+
+<br/><img src="http://img.oradba.net/img/oracle/middleware/oracle-bi/oracle-bi-installation/oracle-bi-installation_14.png" alt="oracle bi installation"><br/><br/>
+
+<br/><img src="http://img.oradba.net/img/oracle/middleware/oracle-bi/oracle-bi-installation/oracle-bi-installation_15.png" alt="oracle bi installation"><br/><br/>
+
+<br/><img src="http://img.oradba.net/img/oracle/middleware/oracle-bi/oracle-bi-installation/oracle-bi-installation_16.png" alt="oracle bi installation"><br/><br/>
+
+<br/><img src="http://img.oradba.net/img/oracle/middleware/oracle-bi/oracle-bi-installation/oracle-bi-installation_17.png" alt="oracle bi installation"><br/><br/>
+
+<br/><img src="http://img.oradba.net/img/oracle/middleware/oracle-bi/oracle-bi-installation/oracle-bi-installation_18.png" alt="oracle bi installation"><br/><br/>
+
+<br/><img src="http://img.oradba.net/img/oracle/middleware/oracle-bi/oracle-bi-installation/oracle-bi-installation_19.png" alt="oracle bi installation"><br/><br/>
+
+<br/><img src="http://img.oradba.net/img/oracle/middleware/oracle-bi/oracle-bi-installation/oracle-bi-installation_20.png" alt="oracle bi installation"><br/><br/>
+
+<br/><br/>
+
+<pre>
+
+Type: Enterprise Install - Create New BI System
+        Installation Details
+                Middleware Home: /u01/app/oracle/oraclebi/11.1
+                BI Oracle Home: /u01/app/oracle/oraclebi/11.1/Oracle_BI1
+                WebLogic Server Home: /u01/app/oracle/oraclebi/11.1/wlserver_10.3
+                BI Domain Home: /u02/oracle_bi_domains/bifoundation_domain
+                BI Domain Name: bifoundation_domain
+                Instance Home: /u01/app/oracle/oraclebi/11.1/instance1
+                Instance Name: instance1
+        Configure Components
+                WebLogic Console
+                        http://oraclebi.localdomain:7001/console
+                Oracle Enterprise Manager
+                        http://oraclebi.localdomain:7001/em
+                Business Intelligence Enterprise Edition
+                        http://oraclebi.localdomain:9704/analytics
+                Business Intelligence Publisher
+                        http://oraclebi.localdomain:9704/xmlpserver
+                Real-Time Decisions
+                        http://oraclebi.localdomain:9704/ui
+                Calculation Manager
+                        http://oraclebi.localdomain:9704/workspace
+                Financial Reports
+                        http://oraclebi.localdomain:9704/workspace
+                Workspace
+                        http://oraclebi.localdomain:9704/workspace
+                Essbase Suite
+                APS
+                        http://oraclebi.localdomain:9704/aps
+                Essbase Server
+                Essbase Studio
+                        oraclebi.localdomain
+                Essbase Administration Services
+                        oraclebi.localdomain:9704
+
+
+
+</pre>
+
+
+
+<br/><img src="http://img.oradba.net/img/oracle/middleware/oracle-bi/oracle-bi-installation/oracle-bi-installation_21.png" alt="oracle bi installation"><br/><br/>
+
+<br/><img src="http://img.oradba.net/img/oracle/middleware/oracle-bi/oracle-bi-installation/oracle-bi-installation_22.png" alt="oracle bi installation"><br/><br/>
+
+<br/><img src="http://img.oradba.net/img/oracle/middleware/oracle-bi/oracle-bi-installation/oracle-bi-installation_23.png" alt="oracle bi installation"><br/><br/>
+
+<br/><img src="http://img.oradba.net/img/oracle/middleware/oracle-bi/oracle-bi-installation/oracle-bi-installation_24.png" alt="oracle bi installation"><br/><br/>
+
+<br/><img src="http://img.oradba.net/img/oracle/middleware/oracle-bi/oracle-bi-installation/oracle-bi-installation_25.png" alt="oracle bi installation"><br/><br/>
+
+<br/><img src="http://img.oradba.net/img/oracle/middleware/oracle-bi/oracle-bi-installation/oracle-bi-installation_26.png" alt="oracle bi installation"><br/><br/>
+
+<br/><img src="http://img.oradba.net/img/oracle/middleware/oracle-bi/oracle-bi-installation/oracle-bi-installation_27.png" alt="oracle bi installation"><br/><br/>
+
+<br/><img src="http://img.oradba.net/img/oracle/middleware/oracle-bi/oracle-bi-installation/oracle-bi-installation_28.png" alt="oracle bi installation"><br/><br/>
+
+<br/><img src="http://img.oradba.net/img/oracle/middleware/oracle-bi/oracle-bi-installation/oracle-bi-installation_29.png" alt="oracle bi installation"><br/><br/>
+
+<br/><img src="http://img.oradba.net/img/oracle/middleware/oracle-bi/oracle-bi-installation/oracle-bi-installation_30.png" alt="oracle bi installation"><br/><br/>
+
+<br/><img src="http://img.oradba.net/img/oracle/middleware/oracle-bi/oracle-bi-installation/oracle-bi-installation_31.png" alt="oracle bi installation"><br/><br/>
+
+<br/><img src="http://img.oradba.net/img/oracle/middleware/oracle-bi/oracle-bi-installation/oracle-bi-installation_32.png" alt="oracle bi installation"><br/><br/>
+
+<br/><img src="http://img.oradba.net/img/oracle/middleware/oracle-bi/oracle-bi-installation/oracle-bi-installation_33.png" alt="oracle bi installation"><br/><br/>
+
+
+
+
+
+</div>		
+		
+	
+
+
+
+
+
+<br/><br/>
+<hr>
+<br/>
+
+<div align="center">
+	<a href="../../index.html"><h3>Oracle DBA</h3></a>
+</div>
+
+	<div align="center">
+		<strong>tags:</strong> <a href="../../index.html">Oracle Linux</a> || 
+		<a href="../../sitemap.php.html">Oracle DataBase</a> ||
+		<a href="../../sitemap.php.html">Oracle Weblogic</a> || 
+		<a href="http://plsql.ru/">SQL & PL/SQL</a> || 
+ 		<a href="http://javadev.ru/">Java</a> || 
+ 		<a href="http://oracle-adf.ru/">Oracle ADF</a>
+	</div>
+
+	
+	<div align="center">
+		Исходные коды сайта oracle-dba.ru на <a href="https://github.com/plsql/oracle-dba.ru">github</a>
+	</div>
+
+
+<!---------------->
+<!-- Page Info  -->
+
+<!-- Эта страница была загружена с сайта: -->
+<!-- http://prev.oracle-dba.ru/install/business-intelligence/oracle-bi-server-installation.php -->
+
+<!----------------------->
+<!-- Google Analinics  -->
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-4894954-13']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+
+<!-- Google Analinics  -->
+<!----------------------->
+
+<!-- Дата обращения к странице -->
+<!-- 05/08/2015 -->
+
+<!--/ Page Info  -->
+<!---------------->
+
+
+
+
+
+</body>
+
+</html>

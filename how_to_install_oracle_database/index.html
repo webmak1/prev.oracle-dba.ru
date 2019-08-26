@@ -1,0 +1,361 @@
+﻿<html>
+
+
+
+<head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta name="keywords" content="Oracle DBA, RAC, ASM, DataGuard"/>
+	<meta name="description" content="Администрирование и разработка баз данных Oracle"/>
+
+		<title>Oracle DBA</title>
+
+		 <link rel="stylesheet" href="http://prev.oracle-dba.ru/how_to_install_oracle_database/hb.css" type="text/css">
+		 <link rel="stylesheet" href="http://prev.oracle-dba.ru/how_to_install_oracle_database/html.css" type="text/css">
+
+
+
+                  <link rel="stylesheet" href="../css/bootstrap.css">
+                  <link rel="stylesheet" href="../css/app.css">
+
+
+
+				<style type="text/css">
+				   .text {
+
+					padding-left: 100px;
+					padding-right: 100px;
+
+				   }
+
+				   .link {
+
+					padding-left: 100px;
+					padding-right: 100px;
+
+				   }
+
+				</style>
+
+
+        <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'oracle-dba'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function () {
+            var s = document.createElement('script'); s.async = true;
+            s.type = 'text/javascript';
+            s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+        </script>
+
+
+
+<style type="text/css">
+ .spoiler_body {display:none; cursor:pointer;}
+</style>
+
+
+	</head>
+
+
+<body>
+
+
+
+
+<br/><br/>
+
+<div class="link">
+<table width="100%" border="0">
+<tr>
+<td align="left" width="40%">
+<a href="../index.html"><img src="../remote_oracle_dba.jpeg" border="0" alt="Oracle DBA"
+/></a>
+</td>
+
+
+<td align="center">
+<a href="../chat.php.html">Заходи в WEBCHAT админов Oracle<br/>
+Здесь старый добрый IRC</a>
+</td>
+
+<td align="right" width="33%">
+<a href="../job/remote_oracle_dba_on_project/index.html"><img src="../remote-oracle-dba-services.jpg" border="0"
+alt="Remote Oracle DBA Services"
+height="" width="300px" /></a>
+</td>
+
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+
+
+<div id="cse" style="width: 100%;">Loading</div>
+<script src="http://www.google.ru/jsapi" type="text/javascript"></script>
+<script type="text/javascript">
+  google.load('search', '1', {language : 'ru', style : google.loader.themes.V2_DEFAULT});
+  google.setOnLoadCallback(function() {
+    var customSearchOptions = {};  var customSearchControl = new google.search.CustomSearchControl(
+      '006168197569183510807:fzridi5qcxw', customSearchOptions);
+    customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+    customSearchControl.draw('cse');
+  }, true);
+</script>
+
+
+<div align="center" style="color:red">
+Работа над этой версией сайта остановлена. Рекомендуется обратиться к новой версии сайта <a href="http://oracle-dba.ru">oracle-dba.ru</a> на котором в дальшейшем будут исправляться все ошибки и неточности.
+</div>
+
+<br/>
+
+<div align="center">
+<a href="../sitemap.php.html">Карта сайта</a>
+</div>
+
+
+
+<h2>Для информации:</h2><br/>
+
+Если нет задачи поставить Oracle на какую-то конкретную операционную систему и задача, в первую очередь, сводится к изучению Oracle,  рекомендую ставить базу на Oracle Linux. Oracle взяла исходники RedHat и собрала свой дистрибутив. В публичном репозитории Oracle Linux имеются пакеты, которые могут сильно упростить инсталляцию базы и дополнительные пакеты, расширяющие стандартные возможности. В дополнении ко всему вышесказанному, вы можете использовать допиленное ядро UEK, которое вроде как в некоторых случаях имеет некоторые преимущесва перед стандартным. Но здесь нужно проводить тесты конкретного приложения. Ссылки на дистрибутив Oracle Lunux в теме для инсталляции.
+
+<br/><br/>
+По поводу Centos 7.X и возможных версий Oracle Linux 7.X. <br/>
+Я пока на эту ветку смотреть не собираюсь. Подождем появления версии 7.2, не ранее.
+
+<br/><br/>
+<h2>Подготовка к инсталляции базы данных Oracle в операционной системе Oracle Linux:</h2><br/>
+
+<ul>
+	<li><a href="http://pre.sysadm.ru/linux/virtual/virtualbox/centos/6/">Инсталляция VirtualBox на Centos 6.4 Server без графического интерфейса (GUI)</a></li>
+	<li><a href="../vitrualBox_installation_on_ubuntu.php.html">Инсталляция VirtualBox в операционной системе Ubuntu в консоли</a></li>
+	<li><a href="../vm_vitrualbox_for_oracle_database_windows_2008.php.html">Создание виртуальной машины VirtualBox для инсталляции базы данных Oracle под Windows</a></li>
+	<li><a href="../vm_vitrualbox_for_oracle_database_oracle_linux.php.html">Создание виртуальной машины VirtualBox для инсталляции базы данных Oracle под Linux</a></li>
+	<li><a href="../database/linux/6.4/install/index.html">Инсталляция Oracle Linux 6.4 x86 64 bit</a></li>
+	<li><a href="../Oracle_Linux_Installation.php.html">Инсталляция Oracle Linux 5.8 x86 64 bit</a></li>
+</ul>
+
+
+<br/><br/>
+<h1>Single-Instance Architecture</h1>
+
+
+<br/>
+<h2>Инсталляция базы данных Oracle в операционной системе Microsoft Windows:</h2><br/>
+
+<ul>
+	<li><a href="../database/windows/2008/oracle/12.1/install/index.html"><strong>Инсталляция Oracle Database 12g Release 1 в операционной системе Microsoft Windows 2008 Server</strong></a> (может где и напутал вначале)</li>
+	<li><a href="http://odba.ru/showthread.php?t=294"><strong>Инсталляция Oracle Database 11g Release 2 в операционной системе Microsoft Windows 2003 Server</strong></a> </li>
+	<li><a href="http://odba.ru/showthread.php?t=297"><strong>Инсталляция Oracle Database 10g Release 2 в операционной системе Microsoft Windows 2003 Server</strong></a> </li>
+</ul>
+
+
+
+
+
+<br/>
+<h2>Инсталляция базы данных Oracle в операционной системе Oracle Linux:</h2><br/>
+
+<ul>
+
+	<li><a href="http://odba.ru/showthread.php?t=331"><strong>Команды редактора VI</strong></a></li>
+	<li><a href="../database/linux/6.4/oracle/12.1/install/index.html"><strong>Инсталляция Oracle DataBase Server (12.1.0.1) в операционной системе Oracle Linux (6.4 x86_64)</strong></a> (Server Linux -- рабочая станция Linux)</li>
+	<li><a href="../database/linux/6.3/oracle/11.2/install/index.html"><strong>Инсталляция Oracle DataBase Server (11.2.0.3) в операционной системе Oracle Linux (6.3 x86_64)</strong></a> (Server Linux -- рабочая станция Windows)</li>
+</li>
+</ul>
+
+
+
+<br/>
+<br/>
+
+<strong>Дополнительно:</strong>
+<br/><br/>
+
+<ul>
+
+<li><a href="https://docs.google.com/document/d/1iGmRtwwcC9FGESnlR7v5qrcLKOzGIoh1GNeU5N0Q5cQ/edit">Инсталляция Oracle DataBase 11G R2 x86 64 bit в операционной системе Oracle Linux 5.7 x86 64 bit (ASM)</a></li>
+
+</ul>
+
+<br/>
+
+ASM - более "правильный" способ подготовки окружения Oracle.
+Суть в том, что для хранения данных используется не файловая система (например, ext*), заточенная
+для обычных операций в операционной системе, а файловая система разработанная специалистами из Oracle для хранения данных.
+
+<br/><br/>
+
+"Сырые" (RAW) жесткие диски без файловой системы объединяются в пулы специальными средствами Oracle, что позволяет их логически организовывать и иметь какие-то преимущества по сравнению с файловой системой операционной системы.
+
+
+<br/><br/>
+
+При этом создается дополнительный экземпляр Oracle, инсталлируется GRID,
+появляются еще какие-то дополнительные возможности. Администрирование несколько усложняется.
+
+<br/><br/>
+
+Лично мне, не приходилось плотно работать с окружением, где бы использовался ASM
+(поэтому может чего и не знаю), но приходилось устанавливать  (установил, отдал и забыл)
+и настраивать ASM в окружении для RAC.
+
+<br/><br/>
+
+Если я понял что-то неправильно, поправьте.
+
+<br/>
+<br/>
+
+
+<br/>
+<h2>Инсталляция Oracle Client:</h2><br/>
+
+<ul>
+	<li><a href="../How_to_Install_Oracle_Client_11gR2_on_Windows.php.html">Инсталляция Oracle Client 11G R2 32 bit в операционной системе Windows XP 32 bit</a></li>
+	<li><a href="../install/oracle_client_installation_on_linux/index.html">Инсталляция Oracle Instantclient в OEL 6.3 x86-64</a>
+</ul>
+
+
+<br/>
+Instantclient - альтернатива стандартному Oracle Client. Проще в установке на Linux (если нужно поставить client на Ubuntu, то лучше исользовать его). А так это минимальный набор библиотек для удаленного подключения к серверу баз данных ( Oracle Call Interface, OCI). В дополнение, я обычно устанавливаю утилиту командной строки SQLPlus. И все, больше ничего для нормальной работы и не требуется.
+
+
+
+
+
+<br/><br/><br/>
+<h2>Инсталляция базы данных Oracle в других операционных системах:</h2><br/>
+
+
+<ul>
+	<li><a href="http://odba.ru/showthread.php?t=303"><strong>Инсталляция Oracle Database 11g Release 2 в Oracle Solaris 10</strong></a> </li>
+</ul>
+
+
+
+<br/><br/><br/>
+
+<h2>Инсталляция бесплатных версий баз данных Oracle:</h2><br/>
+
+<ul>
+	<li><a href="http://odba.ru/showthread.php?t=742"><strong>Инструкция по инсталляции базы данных Oracle 11g XE на сервер Oracle Enterprise Linux 5.8</strong></a></li>
+	<li><a href="http://odba.ru/showthread.php?t=400"><strong>Инструкция по инсталляции базы данных Oracle 10g XE на сервер Oracle Enterprise Linux 4.8</strong></a></li>
+	<li><a href="http://odba.ru/showthread.php?t=296"><strong>Инсталляция Oracle Database 10g Express Edition в ОС Windows 2003 Server </strong></a></li>
+
+
+</ul>
+
+
+<br/><br/>
+
+<br/><br/>
+<h1>Distributed System Architectures</h1>
+<br/><br/>
+
+<ul>
+<li><a href="http://odba.ru/showthread.php?t=469">Oracle Data Guard: Развертывание физического Standby средствами Oracle Database</a></li>
+
+
+<li><a href="../database/linux/5.8/oracle/11.2/rac/install/index.html">Инсталляция Oracle DataBase Real Application Cluster 11G R2 x86 64 bit в операционной системе Oracle Linux 5.8 x86 64 bit</a></li>
+<li><a href="http://habrahabr.ru/post/233801/">How-to: Разворачиваем Oracle Real Application Cluster 11g на VirtualBox</a> (ссылка HabraHabr, может есть что-то полезное. Я и коллеги не используем GUI не серверах, но пусть будет, для коллекции.)</li>
+
+</ul>
+
+<br/>
+<br/>
+
+<strong>Streams, GoldenGate</strong>
+
+<br/>
+<br/>
+
+У Oracle было решение по репликации данных между базами данных под названием Streams. Большая корпорация купила конкурента этой технологии, одного из лидеров по этому классу задач - Golden Gate. Со Streams не работал, Golden Gate настраивать приходилось.
+
+<br/>
+<br/>
+
+<ul>
+<li><a href="http://habrahabr.ru/post/238521/">Настройка двухсторонней синхронизации БД Oracle (Oracle Streams)</a> (ссылка HabraHabr)</li>
+</ul>
+
+
+</div>
+</div>
+
+
+
+
+
+
+
+<br/><br/>
+<hr>
+<br/>
+
+<div align="center">
+	<a href="../index.html"><h3>Oracle DBA</h3></a>
+</div>
+
+	<div align="center">
+		<strong>tags:</strong> <a href="../index.html">Oracle Linux</a> || 
+		<a href="../sitemap.php.html">Oracle DataBase</a> ||
+		<a href="../sitemap.php.html">Oracle Weblogic</a> || 
+		<a href="http://plsql.ru/">SQL & PL/SQL</a> || 
+ 		<a href="http://javadev.ru/">Java</a> || 
+ 		<a href="http://oracle-adf.ru/">Oracle ADF</a>
+	</div>
+
+	
+	<div align="center">
+		Исходные коды сайта oracle-dba.ru на <a href="https://github.com/plsql/oracle-dba.ru">github</a>
+	</div>
+
+
+<!---------------->
+<!-- Page Info  -->
+
+<!-- Эта страница была загружена с сайта: -->
+<!-- http://prev.oracle-dba.ru/how_to_install_oracle_database/index.php -->
+
+<!----------------------->
+<!-- Google Analinics  -->
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-4894954-13']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+
+<!-- Google Analinics  -->
+<!----------------------->
+
+<!-- Дата обращения к странице -->
+<!-- 05/08/2015 -->
+
+<!--/ Page Info  -->
+<!---------------->
+
+
+
+
+
+</body>
+
+</html>

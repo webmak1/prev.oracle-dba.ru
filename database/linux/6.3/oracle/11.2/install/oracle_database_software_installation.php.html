@@ -1,0 +1,557 @@
+﻿<html>
+
+
+
+<head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta name="keywords" content="Oracle DBA, RAC, ASM, DataGuard"/>
+	<meta name="description" content="Администрирование и разработка баз данных Oracle"/>
+
+		<title>Oracle DBA</title>
+
+		 <link rel="stylesheet" href="http://prev.oracle-dba.ru/database/linux/6.3/oracle/11.2/install/hb.css" type="text/css">
+		 <link rel="stylesheet" href="http://prev.oracle-dba.ru/database/linux/6.3/oracle/11.2/install/html.css" type="text/css">
+
+
+
+                  <link rel="stylesheet" href="../../../../../../css/bootstrap.css">
+                  <link rel="stylesheet" href="../../../../../../css/app.css">
+
+
+
+				<style type="text/css">
+				   .text {
+
+					padding-left: 100px;
+					padding-right: 100px;
+
+				   }
+
+				   .link {
+
+					padding-left: 100px;
+					padding-right: 100px;
+
+				   }
+
+				</style>
+
+
+        <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'oracle-dba'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function () {
+            var s = document.createElement('script'); s.async = true;
+            s.type = 'text/javascript';
+            s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+        </script>
+
+
+
+<style type="text/css">
+ .spoiler_body {display:none; cursor:pointer;}
+</style>
+
+
+	</head>
+
+
+<body>
+
+
+
+
+<br/><br/>
+
+<div class="link">
+<table width="100%" border="0">
+<tr>
+<td align="left" width="40%">
+<a href="../../../../../../index.html"><img src="../../../../../../remote_oracle_dba.jpeg" border="0" alt="Oracle DBA"
+/></a>
+</td>
+
+
+<td align="center">
+<a href="../../../../../../chat.php.html">Заходи в WEBCHAT админов Oracle<br/>
+Здесь старый добрый IRC</a>
+</td>
+
+<td align="right" width="33%">
+<a href="../../../../../../job/remote_oracle_dba_on_project/index.html"><img src="../../../../../../remote-oracle-dba-services.jpg" border="0"
+alt="Remote Oracle DBA Services"
+height="" width="300px" /></a>
+</td>
+
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+
+
+<div id="cse" style="width: 100%;">Loading</div>
+<script src="http://www.google.ru/jsapi" type="text/javascript"></script>
+<script type="text/javascript">
+  google.load('search', '1', {language : 'ru', style : google.loader.themes.V2_DEFAULT});
+  google.setOnLoadCallback(function() {
+    var customSearchOptions = {};  var customSearchControl = new google.search.CustomSearchControl(
+      '006168197569183510807:fzridi5qcxw', customSearchOptions);
+    customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+    customSearchControl.draw('cse');
+  }, true);
+</script>
+
+
+<div align="center" style="color:red">
+Работа над этой версией сайта остановлена. Рекомендуется обратиться к новой версии сайта <a href="http://oracle-dba.ru">oracle-dba.ru</a> на котором в дальшейшем будут исправляться все ошибки и неточности.
+</div>
+
+<br/>
+
+<div align="center">
+<a href="../../../../../../sitemap.php.html">Карта сайта</a>
+</div>
+
+
+
+<br/><br/><br/>
+<h2>[Инсталляция Oracle 11.2]: Инсталляция СУБД Oracle (DataBase SoftWare)</h2>
+
+<br/><br/>
+
+Войдите в систему пользователем, от имени которого будет будет происходить инсталляция базы данных.
+
+<br/><br/>
+
+       <div class="linuxCommand">
+		# su - oracle11
+       </div>
+
+<br/>
+
+       <div class="linuxCommand">
+		$ cd /tmp
+       </div>
+
+<br/>
+
+       <div class="linuxCommand">
+		$ unzip p10404530_112030_Linux-x86-64_1of7.zip; \
+unzip p10404530_112030_Linux-x86-64_2of7.zip
+       </div>
+
+
+<br/>
+
+       <div class="linuxCommand">
+		$ cd /tmp/database
+       </div>
+
+<br/>
+
+
+
+Определите системную переменную DISPLAY следующим образом.
+<br/>
+
+       <div class="linuxCommand">
+		$ export DISPLAY=192.168.1.200:0.0
+       </div>
+
+<br/>
+
+В данном случае 192.168.1.200 - ip адрес компьютера, с которого происходит процесс управления установкой. На этом компьютере должен быть стартован xserver, например XMing (под windows).
+
+
+<br/>
+
+==========================================================
+<br/><br/>
+
+[Offtopic 1]:<br/><br/>
+
+Если управление установкой происходит с Debian linux (Ubuntu, Kubuntu, Mint etc.)
+
+
+<br/><br/>
+
+<strong>На клиенте:</strong>
+
+<br/><br/>
+
+
+
+       <div class="linuxCommand">
+		$ sudo apt-get install -y gdm 
+       </div>
+
+
+<br/><img src="http://img.oradba.net/img/oracle/database/simple/11.2/gdm.png" border="0" alt="Oracle installation"><br/>
+
+
+<br/><br/>
+
+       <div class="linuxCommand">
+		$ sudo apt-get install -y gdm 
+       </div>
+
+<br/><br/>
+
+// Если выбран gdm<br/>
+ <br/>
+
+       <div class="linuxCommand">
+		# vi /etc/gdm/custom.conf
+       </div>
+
+
+
+<div class="fileContent">
+
+###########################<br/>
+[xdmcp]<br/><br/>
+
+[chooser]<br/><br/>
+
+[security]<br/><br/>
+DisallowTCP=false<br/><br/>
+
+[debug]<br/>
+###########################</div>
+
+
+
+<br/><br/>
+// Если выбран lightgdm<br/>
+
+
+       <div class="linuxCommand">
+		# vi /etc/lightdm/lightdm.conf 
+       </div>
+
+<br/>
+
+<div class="fileContent">
+
+###########################<br/><br/>
+
+[SeatDefaults]<br/>
+user-session=ubuntu<br/>
+greeter-session=unity-greeter<br/>
+xserver-allow-tcp=true<br/><br/>
+
+###########################</div>
+
+<br/><br/>
+
+       <div class="linuxCommand">
+		# reboot 
+       </div>
+
+<br/><br/>
+// Команды проверки
+       <div class="linuxCommand">
+		$ sudo apt-get install -y nmap nc
+       </div>
+
+
+<br/><br/>
+
+       <div class="linuxCommand">
+		$ netstat -an | grep -F 6000
+       </div>
+
+<div class="fileContent">
+
+tcp        0      0 0.0.0.0:6000            0.0.0.0:*               LISTEN <br/>    
+tcp6       0      0 :::6000                 :::*                    LISTEN
+</div>
+
+
+<br/><br/>
+
+       <div class="linuxCommand">
+		# nmap -p 6000 192.168.1.200
+       </div>
+<div class="fileContent">
+Starting Nmap 5.21 ( http://nmap.org ) at 2013-04-28 15:55 MSK
+</div>
+
+
+
+<br/><br/>
+
+       <div class="linuxCommand">
+		$ nc -vv 192.168.1.200 6000
+       </div>
+<div class="fileContent">
+Connection to 192.168.1.200 6000 port [tcp/x11] succeeded!
+</div>
+
+
+
+<br/><br/>
+
+       <div class="linuxCommand">
+		# xhost +192.168.1.10
+       </div>
+
+<br/><br/>
+
+========
+<br/><br/>
+<strong>На сервере:</strong>
+
+<br/><br/>
+
+Проверить работу можно установив xterm или xclock
+
+<br/><br/>
+
+       <div class="linuxCommand">
+		# yum install -y xterm xclock
+       </div>
+
+<br/><br/>
+
+       <div class="linuxCommand">
+		$ export DISPLAY=192.168.1.200:0.0
+       </div>
+
+<br/><br/>
+
+
+       <div class="linuxCommand">
+		$ xterm
+       </div>
+
+<br/><br/>
+или
+<br/><br/>
+
+       <div class="linuxCommand">
+		$ xclock
+       </div>
+
+
+<br/><br/>
+
+
+
+<br/><img src="http://img.oradba.net/img/oracle/database/simple/11.2/xclock.png" border="0" alt="Oracle installation"><br/>
+
+
+<br/><br/>
+[Offtopic 2]:
+
+<br/><br/>
+
+Если управление установкой происходит с дистрибутива RedHat linux (Fedora, Centos etc...)
+http://www.softpanorama.org/Xwindows/Troubleshooting/can_not_open_display.shtml
+<br/><br/>
+==========================================================
+
+
+<br/><br/>
+
+<strong>Проверка конфигурации перед инсталляцией: </strong>
+
+<br/><br/>
+
+
+<div class="linuxCommand">
+	$ ./runInstaller -executeSysPrereqs
+</div>
+
+<br/>
+
+<div class="linuxCode">
+Starting Oracle Universal Installer...
+
+Checking Temp space: must be greater than 120 MB.   Actual 27697 MB    Passed
+Checking swap space: must be greater than 150 MB.   Actual 4031 MB    Passed
+Checking monitor: must be configured to display at least 256 colors.    Actual 65536    Passed
+Exiting Oracle Universal Installer, log for this session can be found at /tmp/OraInstall2012-06-10_03-03-29AM/installActions2012-06-10_03-03-29AM.log
+</div>
+
+
+<br/><br/>
+
+<strong>Запус программы инсталляции базы данных: </strong>
+
+
+<div class="linuxCommand">
+	$ ./runInstaller
+</div>
+
+<br/>
+
+В некоторых случаях приходится запускать инсталляцию с игнорированием системных сообщений
+
+<br/>
+
+<div class="linuxCommand">
+	$ ./runInstaller -ignoreSysPrereqs
+</div>
+
+<br/>
+
+Если все нормально, появится картинка:  
+
+<br/><br/>
+
+
+
+
+<img src="http://img.oradba.net/img/oracle/database/simple/11.2/oracle11_database_software_installation_01.PNG" border="0" alt="Oracle RAC installation"><br/><br/>
+<img src="http://img.oradba.net/img/oracle/database/simple/11.2/oracle11_database_software_installation_02.PNG" border="0" alt="Oracle RAC installation"><br/><br/>
+<img src="http://img.oradba.net/img/oracle/database/simple/11.2/oracle11_database_software_installation_03.PNG" border="0" alt="Oracle RAC installation"><br/><br/>
+<img src="http://img.oradba.net/img/oracle/database/simple/11.2/oracle11_database_software_installation_04.PNG" border="0" alt="Oracle RAC installation"><br/><br/>
+<img src="http://img.oradba.net/img/oracle/database/simple/11.2/oracle11_database_software_installation_05.PNG" border="0" alt="Oracle RAC installation"><br/><br/>
+<img src="http://img.oradba.net/img/oracle/database/simple/11.2/oracle11_database_software_installation_06.PNG" border="0" alt="Oracle RAC installation"><br/><br/>
+<img src="http://img.oradba.net/img/oracle/database/simple/11.2/oracle11_database_software_installation_07.PNG" border="0" alt="Oracle RAC installation"><br/><br/>
+<img src="http://img.oradba.net/img/oracle/database/simple/11.2/oracle11_database_software_installation_08.PNG" border="0" alt="Oracle RAC installation"><br/><br/>
+<img src="http://img.oradba.net/img/oracle/database/simple/11.2/oracle11_database_software_installation_09.PNG" border="0" alt="Oracle RAC installation"><br/><br/>
+<img src="http://img.oradba.net/img/oracle/database/simple/11.2/oracle11_database_software_installation_10.PNG" border="0" alt="Oracle RAC installation"><br/><br/>
+<img src="http://img.oradba.net/img/oracle/database/simple/11.2/oracle11_database_software_installation_11.PNG" border="0" alt="Oracle RAC installation"><br/><br/>
+<img src="http://img.oradba.net/img/oracle/database/simple/11.2/oracle11_database_software_installation_12.PNG" border="0" alt="Oracle RAC installation"><br/><br/>
+<img src="http://img.oradba.net/img/oracle/database/simple/11.2/oracle11_database_software_installation_13.PNG" border="0" alt="Oracle RAC installation"><br/><br/>
+<img src="http://img.oradba.net/img/oracle/database/simple/11.2/oracle11_database_software_installation_14.PNG" border="0" alt="Oracle RAC installation"><br/><br/>
+<img src="http://img.oradba.net/img/oracle/database/simple/11.2/oracle11_database_software_installation_15.PNG" border="0" alt="Oracle RAC installation"><br/><br/>
+<img src="http://img.oradba.net/img/oracle/database/simple/11.2/oracle11_database_software_installation_16.PNG" border="0" alt="Oracle RAC installation"><br/><br/>
+<img src="http://img.oradba.net/img/oracle/database/simple/11.2/oracle11_database_software_installation_17.PNG" border="0" alt="Oracle RAC installation"><br/><br/>
+
+
+
+После появления следующего окна, необходимо выполнить под учетной записью root следующие скрипты. Рекомендуется подключиться к серверу баз данных еще одной сессией putty.
+
+<br/>
+
+<div class="linuxCommand">
+	# /u01/oraInventory/orainstRoot.sh
+</div>
+
+
+<br/>
+
+<div class="linuxCode">
+Changing permissions of /u01/oraInventory.
+Adding read,write permissions for group.
+Removing read,write,execute permissions for world.
+
+Changing groupname of /u01/oraInventory to oinstall.
+The execution of the script is complete.
+</div>
+
+<br/>
+
+<div class="linuxCommand">
+	# /u01/oracle/database/11.2/root.sh
+</div>
+
+
+<br/>
+
+<div class="linuxCode">
+Performing root user operation for Oracle 11g
+
+The following environment variables are set as:
+    ORACLE_OWNER= oracle11
+    ORACLE_HOME=  /u01/oracle/database/11.2
+
+Enter the full pathname of the local bin directory: [/usr/local/bin]:
+   Copying dbhome to /usr/local/bin ...
+   Copying oraenv to /usr/local/bin ...
+   Copying coraenv to /usr/local/bin ...
+
+
+Creating /etc/oratab file...
+Entries will be added to the /etc/oratab file as needed by
+Database Configuration Assistant when a database is created
+Finished running generic part of root script.
+Now product-specific root actions will be performed.
+Finished product-specific root actions.
+</div>
+
+
+
+
+</div>		
+		
+	
+
+
+
+
+
+<br/><br/>
+<hr>
+<br/>
+
+<div align="center">
+	<a href="../../../../../../index.html"><h3>Oracle DBA</h3></a>
+</div>
+
+	<div align="center">
+		<strong>tags:</strong> <a href="../../../../../../index.html">Oracle Linux</a> || 
+		<a href="../../../../../../sitemap.php.html">Oracle DataBase</a> ||
+		<a href="../../../../../../sitemap.php.html">Oracle Weblogic</a> || 
+		<a href="http://plsql.ru/">SQL & PL/SQL</a> || 
+ 		<a href="http://javadev.ru/">Java</a> || 
+ 		<a href="http://oracle-adf.ru/">Oracle ADF</a>
+	</div>
+
+	
+	<div align="center">
+		Исходные коды сайта oracle-dba.ru на <a href="https://github.com/plsql/oracle-dba.ru">github</a>
+	</div>
+
+
+<!---------------->
+<!-- Page Info  -->
+
+<!-- Эта страница была загружена с сайта: -->
+<!-- http://prev.oracle-dba.ru/database/linux/6.3/oracle/11.2/install/oracle_database_software_installation.php -->
+
+<!----------------------->
+<!-- Google Analinics  -->
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-4894954-13']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+
+<!-- Google Analinics  -->
+<!----------------------->
+
+<!-- Дата обращения к странице -->
+<!-- 05/08/2015 -->
+
+<!--/ Page Info  -->
+<!---------------->
+
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,416 @@
+﻿<html>
+
+
+
+<head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta name="keywords" content="Oracle DBA, RAC, ASM, DataGuard"/>
+	<meta name="description" content="Администрирование и разработка баз данных Oracle"/>
+
+		<title>Oracle DBA</title>
+
+		 <link rel="stylesheet" href="http://prev.oracle-dba.ru/database/linux/6.3/oracle/11.2/install/hb.css" type="text/css">
+		 <link rel="stylesheet" href="http://prev.oracle-dba.ru/database/linux/6.3/oracle/11.2/install/html.css" type="text/css">
+
+
+
+                  <link rel="stylesheet" href="../../../../../../css/bootstrap.css">
+                  <link rel="stylesheet" href="../../../../../../css/app.css">
+
+
+
+				<style type="text/css">
+				   .text {
+
+					padding-left: 100px;
+					padding-right: 100px;
+
+				   }
+
+				   .link {
+
+					padding-left: 100px;
+					padding-right: 100px;
+
+				   }
+
+				</style>
+
+
+        <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'oracle-dba'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function () {
+            var s = document.createElement('script'); s.async = true;
+            s.type = 'text/javascript';
+            s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+        </script>
+
+
+
+<style type="text/css">
+ .spoiler_body {display:none; cursor:pointer;}
+</style>
+
+
+	</head>
+
+
+<body>
+
+
+
+
+<br/><br/>
+
+<div class="link">
+<table width="100%" border="0">
+<tr>
+<td align="left" width="40%">
+<a href="../../../../../../index.html"><img src="../../../../../../remote_oracle_dba.jpeg" border="0" alt="Oracle DBA"
+/></a>
+</td>
+
+
+<td align="center">
+<a href="../../../../../../chat.php.html">Заходи в WEBCHAT админов Oracle<br/>
+Здесь старый добрый IRC</a>
+</td>
+
+<td align="right" width="33%">
+<a href="../../../../../../job/remote_oracle_dba_on_project/index.html"><img src="../../../../../../remote-oracle-dba-services.jpg" border="0"
+alt="Remote Oracle DBA Services"
+height="" width="300px" /></a>
+</td>
+
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+
+
+<div id="cse" style="width: 100%;">Loading</div>
+<script src="http://www.google.ru/jsapi" type="text/javascript"></script>
+<script type="text/javascript">
+  google.load('search', '1', {language : 'ru', style : google.loader.themes.V2_DEFAULT});
+  google.setOnLoadCallback(function() {
+    var customSearchOptions = {};  var customSearchControl = new google.search.CustomSearchControl(
+      '006168197569183510807:fzridi5qcxw', customSearchOptions);
+    customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+    customSearchControl.draw('cse');
+  }, true);
+</script>
+
+
+<div align="center" style="color:red">
+Работа над этой версией сайта остановлена. Рекомендуется обратиться к новой версии сайта <a href="http://oracle-dba.ru">oracle-dba.ru</a> на котором в дальшейшем будут исправляться все ошибки и неточности.
+</div>
+
+<br/>
+
+<div align="center">
+<a href="../../../../../../sitemap.php.html">Карта сайта</a>
+</div>
+
+
+
+<br/><br/><br/>
+<h2>[Инсталляция Oracle 11.2]: Инсталляция обязательных пакетов</h2>
+
+<br/><br/>
+
+
+База данных Oracle, требует, чтобы в системе были обязательно установлены некоторые компоненты. Пакеты можно скачать с публичного репозитория (из интернет) или взять с диска, на котором и располагается дистрибутив операционной системы.
+
+<br/><br/>
+
+1) Инсталляция пакетов с DVD диска Oracle Linux:
+
+<br/><br/>
+
+
+       <div class="linuxCommand">
+
+	# mkdir /mnt/cdrom<br/>
+	# mount -t iso9660 -o ro /dev/cdrom /mnt/cdrom<br/>
+       </div>
+
+<br/><br/>
+
+
+
+       <div class="linuxCommand">
+
+	# vi /etc/yum.repos.d/oracleLinuxRepoDVD.repo<br/>
+       </div>
+
+
+<br/><br/>
+       <div class="fileContent">[OEL63_DVD]<br/>
+name=Oracle Enterprise Linux DVD<br/>
+baseurl=file:///mnt/cdrom/Server/<br/>
+gpgcheck=0<br/>
+enabled=1</div>
+
+
+<br/><br/>
+2) Инсталляция пакетов из репозитория Oracle Linux в интернете:
+<br/><br/>
+
+
+
+       <div class="linuxCommand">
+
+	# vi /etc/yum.repos.d/oracleLinuxRepoINTERNET.repo<br/>
+       </div>
+
+
+
+<br/><br/>
+       <div class="fileContent">[OEL_INTERNET]<br/>
+name=Oracle Enterprise Linux $releasever - $basearch<br/>
+baseurl=http://public-yum.oracle.com/repo/OracleLinux/OL6/latest/$basearch/<br/>
+gpgkey=http://public-yum.oracle.com/RPM-GPG-KEY-oracle-ol6<br/>
+gpgcheck=1<br/>
+enabled=1</div>
+
+
+<br/><br/>
+
+
+       <div class="linuxCommand">
+
+	# yum repolist<br/>
+	# yum update -y<br/>
+       </div>
+
+
+<br/><br/>
+
+======================================<br/><br/>
+
+Offtopic: (Рекомендуется пропустить! Просто для информации)<br/><br/>
+
+Вы можете выполнить следующую команду и пропустить большую часть шагов по установке необходимых пакетов и правильной настройке окружения для инсталляции Oracle.<br/><br/>
+
+# yum install -y oracle-validated <br/><br/>
+
+Выполнив данную команду, Oracle сам инсталлирует все необходимые пакеты, создаст необходимых пользователей, внесет изменения в конфигурационные файлы.<br/>
+Имеется только один минус, возможно, что он сделает не все так как вы хотите. Т.е. будет выполнена подготовка окружения “по умолчанию”.<br/><br/>
+
+======================================<br/><br/>
+
+Следующие пакеты должны быть установлены: <br/><br/>
+
+binutils-2.20.51.0.2-5.11.el6 (x86_64)<br/>
+compat-libcap1-1.10-1 (x86_64)<br/>
+compat-libstdc++-33-3.2.3-69.el6 (x86_64)<br/>
+compat-libstdc++-33-3.2.3-69.el6.i686<br/>
+gcc-4.4.4-13.el6 (x86_64)<br/>
+gcc-c++-4.4.4-13.el6 (x86_64)<br/>
+glibc-2.12-1.7.el6 (i686)<br/>
+glibc-2.12-1.7.el6 (x86_64)<br/>
+glibc-devel-2.12-1.7.el6 (x86_64)<br/>
+glibc-devel-2.12-1.7.el6.i686<br/>
+ksh<br/>
+libgcc-4.4.4-13.el6 (i686)<br/>
+libgcc-4.4.4-13.el6 (x86_64)<br/>
+libstdc++-4.4.4-13.el6 (x86_64)<br/>
+libstdc++-4.4.4-13.el6.i686<br/>
+libstdc++-devel-4.4.4-13.el6 (x86_64)<br/>
+libstdc++-devel-4.4.4-13.el6.i686<br/>
+libaio-0.3.107-10.el6 (x86_64)<br/>
+libaio-0.3.107-10.el6.i686<br/>
+libaio-devel-0.3.107-10.el6 (x86_64)<br/>
+libaio-devel-0.3.107-10.el6.i686<br/>
+make-3.81-19.el6<br/>
+sysstat-9.0.4-11.el6 (x86_64)<br/>
+
+<br/><br/>
+
+       <div class="linuxCommand">
+
+	# yum install -y \<br/>
+	binutils.x86_64 \<br/>
+	compat-libcap1.x86_64 \<br/>
+	compat-libstdc++-33.i686 \<br/>
+	compat-libstdc++-33.x86_64 \<br/>
+	gcc.x86_64 \<br/>
+	gcc-c++.x86_64 \<br/>
+	glibc.i686 \<br/>
+	glibc.x86_64 \<br/>
+	glibc-devel.i686 \<br/>
+	glibc-devel.x86_64 \<br/>
+	ksh.x86_64 \<br/>
+	libgcc.i686 \<br/>
+	libgcc.x86_64 \<br/>
+	libstdc++.i686 \<br/>
+	libstdc++.x86_64 \<br/>
+	libstdc++-devel.i686 \<br/>
+	libstdc++-devel.x86_64 \<br/>
+	libaio.i686 \<br/>
+	libaio.x86_64 \<br/>
+	libaio-devel.i686 \<br/>
+	libaio-devel.x86_64 \<br/>
+	make.x86_64 \<br/>
+	sysstat.x86_64
+       </div>
+
+
+<br/><br/>
+
+
+Следующий пакет нужен для старта графической консоли
+
+<br/><br/>
+
+
+       <div class="linuxCommand">
+
+	# yum install -y xdpyinfo<br/>
+       </div>
+
+
+<br/><br/>
+
+Дополнительные пакеты:
+
+<br/><br/>
+
+
+       <div class="linuxCommand">
+
+	# yum install -y \<br/>
+		mc \<br/>
+		nano \<br/>
+		vim \<br/>
+		emacs \<br/>
+		wget \<br/>
+		xinetd \<br/>
+		screen \<br/>
+		ntp \<br/>
+		unzip
+       </div>
+
+
+<br/><br/>
+
+
+rlwrap - пакет, который позволяет хранить историю команд в SQL*PLUS и RMAN в Linux (его необходимо прописывать отдельной строкой в bash профиле). Установив данный пакет, вы сможете использовать кнопки вверх, вниз для просмотра истории введенных команд, правильную работу команды backspace и др.
+
+<br/><br/>
+
+
+
+       <div class="linuxCommand">
+
+	# yum install -y \<br/>
+	readline-devel.x86_64<br/>
+       </div>
+
+<br/><br/>
+
+
+
+       <div class="linuxCommand">
+
+	# cd /tmp<br/>
+	# wget http://utopia.knoware.nl/~hlub/uck/rlwrap/rlwrap-0.37.tar.gz<br/>
+       </div>
+
+
+
+
+<br/><br/>
+
+
+
+       <div class="linuxCommand">
+
+	# tar zxvf rlwrap-0.37.tar.gz<br/>
+	# cd rlwrap-0.37<br/>
+	# ./configure<br/>
+	# make<br/>
+	# make check<br/>
+	# make install<br/>
+       </div>
+
+</div>		
+		
+	
+
+
+
+
+
+<br/><br/>
+<hr>
+<br/>
+
+<div align="center">
+	<a href="../../../../../../index.html"><h3>Oracle DBA</h3></a>
+</div>
+
+	<div align="center">
+		<strong>tags:</strong> <a href="../../../../../../index.html">Oracle Linux</a> || 
+		<a href="../../../../../../sitemap.php.html">Oracle DataBase</a> ||
+		<a href="../../../../../../sitemap.php.html">Oracle Weblogic</a> || 
+		<a href="http://plsql.ru/">SQL & PL/SQL</a> || 
+ 		<a href="http://javadev.ru/">Java</a> || 
+ 		<a href="http://oracle-adf.ru/">Oracle ADF</a>
+	</div>
+
+	
+	<div align="center">
+		Исходные коды сайта oracle-dba.ru на <a href="https://github.com/plsql/oracle-dba.ru">github</a>
+	</div>
+
+
+<!---------------->
+<!-- Page Info  -->
+
+<!-- Эта страница была загружена с сайта: -->
+<!-- http://prev.oracle-dba.ru/database/linux/6.3/oracle/11.2/install/oracle_install_packages.php -->
+
+<!----------------------->
+<!-- Google Analinics  -->
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-4894954-13']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+
+<!-- Google Analinics  -->
+<!----------------------->
+
+<!-- Дата обращения к странице -->
+<!-- 05/08/2015 -->
+
+<!--/ Page Info  -->
+<!---------------->
+
+
+
+
+
+</body>
+
+</html>

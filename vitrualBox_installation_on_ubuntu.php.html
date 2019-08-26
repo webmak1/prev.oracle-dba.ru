@@ -1,0 +1,449 @@
+﻿<html>
+
+
+
+<head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta name="keywords" content="Oracle DBA, RAC, ASM, DataGuard"/>
+	<meta name="description" content="Администрирование и разработка баз данных Oracle"/>
+
+		<title>Oracle DBA</title>
+
+		 <link rel="stylesheet" href="http://prev.oracle-dba.ru/hb.css" type="text/css">
+		 <link rel="stylesheet" href="http://prev.oracle-dba.ru/html.css" type="text/css">
+
+
+
+                  <link rel="stylesheet" href="css/bootstrap.css">
+                  <link rel="stylesheet" href="css/app.css">
+
+
+
+				<style type="text/css">
+				   .text {
+
+					padding-left: 100px;
+					padding-right: 100px;
+
+				   }
+
+				   .link {
+
+					padding-left: 100px;
+					padding-right: 100px;
+
+				   }
+
+				</style>
+
+
+        <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'oracle-dba'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function () {
+            var s = document.createElement('script'); s.async = true;
+            s.type = 'text/javascript';
+            s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+        </script>
+
+
+
+<style type="text/css">
+ .spoiler_body {display:none; cursor:pointer;}
+</style>
+
+
+	</head>
+
+
+<body>
+
+
+
+
+<br/><br/>
+
+<div class="link">
+	<div align="left">
+
+
+<a href="index.html"><img src="remote_oracle_dba.jpeg" border="0" alt="Remote Oracle DataBase Administrator"></a><br/></div>
+
+
+
+
+<br/>
+<br/><br/>
+
+<div align="center">
+	<h3>Инсталляция VirtualBox в операционной системе Ubuntu 12 в консоли</h3><br/>
+</div>
+
+<br/><br/>
+<strong>Дистрибутивы Ubuntu:</strong><br/>
+http://ubuntu.com
+
+<br/><br/>
+<strong>Дистрибутивы VirtualBox:</strong><br/>
+http://virtualbox.org
+
+
+<br/><br/>
+<hr/>
+<br/><br/>
+
+Получить роли суперпользователя<br/>
+
+       <div class="linuxCommand">
+	$ sudo su -
+       </div>
+
+
+
+<br/><br/>
+Обновить заголовки репоизитория<br/>
+
+       <div class="linuxCommand">
+	# apt-get -y update
+       </div>
+
+
+
+<br/><br/>
+Инсталляция пакетов<br/>
+
+       <div class="linuxCommand">
+	$ sudo apt-get install -y \<br/>
+vim \<br/>
+wget<br/>
+       </div>
+
+
+
+
+<br/><br/>
+Создаем группу администраторов виртуальных машин:<br/>
+
+       <div class="linuxCommand">
+	# groupadd -g 1010 vmadmins
+       </div>
+
+
+
+<br/><br/>
+Создаем пользователя для работы с виртуальными машинами:<br/>
+
+       <div class="linuxCommand">
+	# useradd \<br/>
+	-g vmadmins \<br/>
+	-d /home/vmadm \<br/>
+	-s /bin/bash \<br/>
+	-m vmadm<br/>
+       </div>
+
+
+<br/><br/>
+Назначить пароль созданному пользователю:<br/>
+
+       <div class="linuxCommand">
+	# passwd vmadm
+       </div>
+
+
+<br/><br/>
+Добавляю пользователя vmadm в группу привелигированных пользователей
+<br/><br/>
+Резервная копия файла<br/>
+
+       <div class="linuxCommand">
+	# cp /etc/sudoers /etc/sudoers.bkp
+       </div>
+
+
+
+<br/><br/>
+Предоставление пользователю vmadm возможности подключиться с правами root<br/>
+
+       <div class="linuxCommand">
+	# echo 'vmadm ALL=(ALL) ALL' >> /etc/sudoers
+       </div>
+
+
+<br/><br/>
+
+       <div class="linuxCommand">
+	# su - vmadm
+       </div>
+
+
+
+<br/><br/>
+
+       <div class="linuxCommand">
+	$ cd /tmp/
+       </div>
+
+
+
+<br/><br/>
+Дистрибутив virtualbox<br/>
+
+       <div class="linuxCommand">
+	$ wget http://download.virtualbox.org/virtualbox/4.2.0/virtualbox-4.2_4.2.0-80737~Ubuntu~oneiric_amd64.deb
+       </div>
+
+
+
+<br/><br/>
+Дополнения для virtualbox (не Open Source)<br/>
+
+       <div class="linuxCommand">
+	$ wget http://download.virtualbox.org/virtualbox/4.2.0/Oracle_VM_VirtualBox_Extension_Pack-4.2.0-80737.vbox-extpack
+       </div>
+
+
+
+<br/><br/>
+
+       <div class="linuxCommand">
+	$ chmod +x virtualbox-4.2_4.2.0-80737~Ubuntu~oneiric_amd64.deb 
+       </div>
+
+
+<br/><br/>
+
+       <div class="linuxCommand">
+	$ sudo dpkg -i virtualbox-4.2_4.2.0-80737~Ubuntu~oneiric_amd64.deb
+       </div>
+
+
+
+
+<br/><br/>
+
+       <div class="linuxCode">output:
+
+[sudo] password for vmadm: 
+Selecting previously unselected package virtualbox-4.2.
+(Reading database ... 148563 files and directories currently installed.)
+Unpacking virtualbox-4.2 (from virtualbox-4.2_4.2.0-80737~Ubuntu~oneiric_amd64.deb) ...
+Setting up virtualbox-4.2 (4.2.0-80737~Ubuntu~oneiric) ...
+Adding group `vboxusers' (GID 125) ...
+Done.
+ * Stopping VirtualBox kernel modules                                    [ OK ] 
+ * Uninstalling old VirtualBox DKMS kernel modules                       [ OK ] 
+ * Trying to register the VirtualBox kernel modules using DKMS           [ OK ] 
+ * Starting VirtualBox kernel modules                                    [ OK ] 
+Processing triggers for ureadahead ...
+ureadahead will be reprofiled on next reboot
+Processing triggers for shared-mime-info ...
+Processing triggers for desktop-file-utils ...
+Processing triggers for bamfdaemon ...
+Rebuilding /usr/share/applications/bamf.index...
+Processing triggers for gnome-menus ...
+Processing triggers for hicolor-icon-theme ...
+       </div>
+
+
+<br/><br/>
+
+       <div class="linuxCommand">
+	$ sudo VBoxManage extpack install Oracle_VM_VirtualBox_Extension_Pack-4.2.0-80737.vbox-extpack
+       </div>
+
+
+
+
+<br/><br/>
+
+       <div class="linuxCode">output:
+
+0%...10%...20%...30%...40%...50%...60%...70%...80%...90%...100%
+Successfully installed "Oracle VM VirtualBox Extension Pack".
+       </div>
+
+
+
+<br/><br/>
+
+       <div class="linuxCommand">
+	$ vboxmanage -v
+       </div>
+
+
+<br/><br/>
+
+       <div class="linuxCode">output:
+4.2.0r80737
+       </div>
+
+
+
+<br/><br/>
+Забираю права суперпользователя 
+<br/><br/>
+
+       <div class="linuxCommand">
+	$ sudo cp /etc/sudoers.bkp /etc/sudoers
+       </div>
+
+
+
+<br/><br/>
+Учетная запись под которой происходит работа
+<br/><br/>
+
+       <div class="linuxCommand">
+	$ id
+       </div>
+
+
+
+       <div class="linuxCode">uid=1001(vmadm) gid=1010(vmadmins) groups=1010(vmadmins)</div>
+
+
+<br/><br/>
+
+<strong>Добавляю в конец файла .bashrc ссылку на файл .bash_profile, в котором будут храниться переменные окружения пользователя:</strong>
+
+
+<br/><br/>
+
+
+       <div class="linuxCommand">
+	$ vi ~/.bashrc
+       </div>
+
+       <div class="linuxCode">############################################################
+# Source bash_profile to set JAVA_HOME and add it to the PATH
+. ~/.bash_profile
+############################################################</div>
+
+<br/><br/>
+<h3>Установка переменных окружения</h3>
+
+
+       <div class="linuxCommand">
+	$  vi ~/.bash_profile
+       </div>
+
+<br/><br/>
+
+Добавьте:
+
+
+       <div class="linuxCode">############################################
+
+#### VirtualBox Environment:
+
+          export vm_home=$HOME/machines
+
+############################################</div>
+
+
+<br/><br/>
+
+
+
+
+В качестве vm_home - лучше указать раздел не $HOME - а какой-нибудь раздел, где достаточно места для хранения файлов данных для виртуальных машин. В моем случае это другой диск.
+
+<br/><br/>
+
+Применить новые параметры:
+
+<br/><br/>
+
+
+       <div class="linuxCommand">
+	$ source ~/.bash_profile
+       </div>
+
+  <br/><br/>
+
+
+
+
+</div>
+<br/><br/><br/>
+
+
+
+
+</div>	
+</div>		
+		
+	
+
+
+
+
+
+<br/><br/>
+<hr>
+<br/>
+
+<div align="center">
+	<a href="index.html"><h3>Oracle DBA</h3></a>
+</div>
+
+	<div align="center">
+		<strong>tags:</strong> <a href="index.html">Oracle Linux</a> || 
+		<a href="sitemap.php.html">Oracle DataBase</a> ||
+		<a href="sitemap.php.html">Oracle Weblogic</a> || 
+		<a href="http://plsql.ru/">SQL & PL/SQL</a> || 
+ 		<a href="http://javadev.ru/">Java</a> || 
+ 		<a href="http://oracle-adf.ru/">Oracle ADF</a>
+	</div>
+
+	
+	<div align="center">
+		Исходные коды сайта oracle-dba.ru на <a href="https://github.com/plsql/oracle-dba.ru">github</a>
+	</div>
+
+
+<!---------------->
+<!-- Page Info  -->
+
+<!-- Эта страница была загружена с сайта: -->
+<!-- http://prev.oracle-dba.ru/vitrualBox_installation_on_ubuntu.php -->
+
+<!----------------------->
+<!-- Google Analinics  -->
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-4894954-13']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+
+<!-- Google Analinics  -->
+<!----------------------->
+
+<!-- Дата обращения к странице -->
+<!-- 05/08/2015 -->
+
+<!--/ Page Info  -->
+<!---------------->
+
+
+
+
+
+</body>
+
+</html>

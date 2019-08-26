@@ -1,0 +1,427 @@
+﻿<html>
+
+
+
+<head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta name="keywords" content="Oracle DBA, RAC, ASM, DataGuard"/>
+	<meta name="description" content="Администрирование и разработка баз данных Oracle"/>
+
+		<title>Oracle DBA</title>
+
+		 <link rel="stylesheet" href="http://prev.oracle-dba.ru/hb.css" type="text/css">
+		 <link rel="stylesheet" href="http://prev.oracle-dba.ru/html.css" type="text/css">
+
+
+
+                  <link rel="stylesheet" href="css/bootstrap.css">
+                  <link rel="stylesheet" href="css/app.css">
+
+
+
+				<style type="text/css">
+				   .text {
+
+					padding-left: 100px;
+					padding-right: 100px;
+
+				   }
+
+				   .link {
+
+					padding-left: 100px;
+					padding-right: 100px;
+
+				   }
+
+				</style>
+
+
+        <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'oracle-dba'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function () {
+            var s = document.createElement('script'); s.async = true;
+            s.type = 'text/javascript';
+            s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+        </script>
+
+
+
+<style type="text/css">
+ .spoiler_body {display:none; cursor:pointer;}
+</style>
+
+
+	</head>
+
+
+<body>
+
+
+
+
+<br/><br/>
+
+<div class="link">
+
+
+<table width="100%" border="0">
+<tr>
+<td align="left" width="40%">
+<a href="index.html"><img src="remote_oracle_dba.jpeg" border="0" alt="Oracle DBA"
+/></a>
+</td>
+
+
+<td align="center">
+<a href="chat.php.html">Заходи в WEBCHAT админов Oracle<br/>
+Здесь старый добрый IRC</a>
+</td>
+
+<td align="right" width="33%">
+<a href="job/remote_oracle_dba_on_project/index.html"><img src="remote-oracle-dba-services.jpg" border="0"
+alt="Remote Oracle DBA Services"
+height="" width="300px" /></a>
+</td>
+
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+
+
+<div id="cse" style="width: 100%;">Loading</div>
+<script src="http://www.google.ru/jsapi" type="text/javascript"></script>
+<script type="text/javascript">
+  google.load('search', '1', {language : 'ru', style : google.loader.themes.V2_DEFAULT});
+  google.setOnLoadCallback(function() {
+    var customSearchOptions = {};  var customSearchControl = new google.search.CustomSearchControl(
+      '006168197569183510807:fzridi5qcxw', customSearchOptions);
+    customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+    customSearchControl.draw('cse');
+  }, true);
+</script>
+
+
+<div align="center" style="color:red">
+Работа над этой версией сайта остановлена. Рекомендуется обратиться к новой версии сайта <a href="http://oracle-dba.ru">oracle-dba.ru</a> на котором в дальшейшем будут исправляться все ошибки и неточности.
+</div>
+
+<br/>
+
+<div align="center">
+<a href="sitemap.php.html">Карта сайта</a>
+</div>
+
+<br/>
+<br/><br/>
+
+<div style="padding:10px; border:thin solid black;">
+
+<h3>Доброго времени суток, уважаемые посетители сайта Oracle DBA! </h3><br/>
+
+На данном ресурсе собираются записи, связанные с администрированием баз данных Oracle и технологий тесно с ними связанными (Oracle DataBase, Weblogic, Oracle Golden Gate, etc.).<br/>
+
+Записи могут содержать ошибки, по мере их нахождения и появления новых знаний, содержание будет корректироваться.
+
+<br/><br/>
+К сожалению не все материалы, могу опубликовать, поэтому на сайте размещены примеры достаточно общего характера.
+<br/><br/>
+
+Найдете ошибку пишите, исправим!
+
+<br/><br/>
+Критические замечания? Да пожалуйста, только нужен конструктив.
+<br/><img src="http://marley.org/a3333333mail.gif" alt="Marley" border="0" />
+<br/><br/>
+
+<div align="center">
+	<img src="_pictures/kritika.jpg" alt="Oracle DBA" border="0" />
+</div>
+
+<br/><br/>
+
+</div>
+
+<br/><br/>
+<hr>
+<br/><br/>
+
+
+
+
+<div style="padding:10px; border:thin solid black;">
+
+<h3>Pluralsight Oracle Courses</h3>
+
+<br/>
+Beginner:
+<br/><br/>
+
+<ul>
+
+	<li><strong>Oracle Developer Essentials: Views, Synonyms and Triggers</strong></li>
+	<li><strong>Oracle Developer Essentials: Data Types</strong></li>
+	<li><strong>Oracle Database 12c Fundamentals</strong></li>
+	<li><strong>Oracle PL/SQL Fundamentals - Part 1</strong></li>
+ 	<li><strong>Oracle Database 12c Performance Tuning and Optimization</strong></li>
+ 	<li><strong>Oracle Database 12c: Installation and Upgrade</strong></li>
+
+</ul>
+
+
+<br/><br/>
+Intermediate:
+<br/><br/>
+
+<ul>
+	<li><strong>Working with Collections in Oracle PL/SQL</strong></li>
+	<li><strong>Oracle Developer Essentials: Tables and Indexes</strong></li>
+	<li><strong>Oracle PL/SQL: Transactions, Dynamic SQL & Debugging</strong></li>
+	<li><strong>SQL Data Wrangling in Oracle: Table Data</strong></li>
+	<li><strong>Oracle Performance Tuning for Developers</strong></li>
+	<li><strong>Oracle PL/SQL Fundamentals - Part 2</strong></li>
+	<li><strong>Optimizing SQL Queries in Oracle</strong></li>
+	<li><strong>Advanced SQL Queries in Oracle and SQL Server</strong></li>
+	<li><strong>Oracle Database 12c Disaster Recovery and Data Movement</strong></li>
+	<li><strong>Introduction to Dates, Times and Intervals in Oracle</strong></li>
+</ul>
+
+<br/><br/>
+
+<strong>+ InfiniteSkills - Learning Oracle 12c Training Video</strong>
+<strong>+ Infinite Skills - Oracle 11g Real Application Cluster Training Video</strong><br/>
+
+<br/><br/>
+Ищите на рутрекере.
+
+<br/><br/>
+Захотите разобрать примеры и поделиться результатами, пишите.
+
+</div>
+
+
+
+
+
+<br/><br/>
+<hr>
+<br/><br/>
+
+
+
+<div style="padding:10px; border:thin solid black;">
+
+<h3>Каких материалов не хватает на сайте.</h3>
+
+<ul>
+	<li>Толковой интрукции по инсталляции Oracle в конфигурации Data Guard (StandBy)</li>
+	<li>Скриптов развертывания Instance с заданными параметрами</li>
+	<li>Информации о Oracle Restart (всегда обходились)</li>
+	<li>Документ по инсталляции Oracle DataBase в Solaris</li>
+	<li>Актуальной версии документа по восстановлению базы после потери файлов.</li>
+	<li>Нужно больше информации по DataWarehousing.</li>
+	<li>Чего-то еще?</li>
+</ul>
+
+</div>
+
+
+<br/><br/>
+<hr>
+<br/><br/>
+
+
+
+
+<div style="padding:10px; border:thin solid black;">
+
+	<h3>Хочу поработать на каком-нибудь временном проекте, по внедрению / разработке решений на базе Java / Oracle / Weblogic, etc.</h3>
+
+	<br/>
+
+	Подробнее <a href="job/remote_oracle_dba_on_project/index.html">здесь</a>.
+</div>
+
+
+<br/><br/>
+<hr>
+<br/><br/>
+
+
+
+<div style="padding:10px; border:thin solid black;">
+
+<h3>Если есть вакансии для Oracle DBA, можете опубликовать их на этом сайте совершенно бесплатно.</h3>
+
+Предложения для организаций, но не для кадровых агентств. Обязательное условие - указание зарплатной вилки.
+<br/><img src="http://marley.org/a3333333mail.gif" alt="Marley" border="0" />
+
+</div>
+
+
+<br/><br/>
+<hr>
+<br/><br/>
+
+
+<div style="padding:10px; border:thin solid black;">
+
+
+  <h3>Oracle Database 12c Release 1 (12.1.0.1.0)</h3>
+
+  Вышла новая версия сервера баз данных.<br/>
+  <strong>Oracle Database 12c Release 1 (12.1.0.1.0)</strong><br/>
+
+
+
+   <a href="http://oracle-dba.ru/database/linux/6.4/oracle/12.1/install/"><img src="http://img.oradba.net/img/oracle/database/simple/12.1/instance/oracle12R1_database_instance_creation_01.png" alt="Инсталляция Oracle DataBase 12c Release 1 x86 64 bit в операционной системе Oracle Linux 6.4 x86 64 bit" border="0" /></a>
+
+
+</div>
+
+<br/><br/>
+<hr/>
+<br/><br/>
+
+
+
+<div style="padding:10px; border:thin solid black;">
+  <h3>Скрипты для Oracle DBA</h3>
+
+  Посмотрите, может быть что-то полезное вы найдете и для себя.
+
+  <br/><br/>
+  <ul>
+  	<li>https://github.com/bsrksg123</li>
+  	<li>https://github.com/fiesterovishwa12</li>
+  	<li>https://github.com/rohanrajkalra</li>
+  </ul>
+
+</div>
+
+<br/><br/>
+<hr/>
+<br/><br/>
+
+<div style="padding:10px; border:thin solid black;">
+
+  <h3>Запрос который выведет инвалидные объекты с командами для их перекомпиляции</h3>
+
+  <br/>
+  <pre>
+
+  SELECT 'ALTER '||DECODE(OBJECT_TYPE, 'PACKAGE BODY', 'PACKAGE', OBJECT_TYPE)||' '||OWNER||'.'||OBJECT_NAME||' COMPILE '||DECODE(OBJECT_TYPE, 'PACKAGE BODY', 'BODY')||';' sqlTxt
+  FROM dba_objects
+  WHERE 1=1
+  and status = 'INVALID'
+  and owner in ('SCOTT','HR')
+  and object_type not like 'JAVA%'
+  </pre>
+
+</div>
+
+<br/><br/>
+<hr/>
+<br/><br/>
+
+
+<strong>У меня в Африке богатые родственники регулярно умирают. И их
+адвокаты мне пишут о своем желании вернуть миллионы долларов.
+
+<br/><br/>
+Что делать?</strong>
+
+
+<br/><br/>
+<hr/>
+<br/><br/>
+
+
+<strong>Избыточность наглядно:</strong>
+<br/><br/>
+	<div align="center">
+		<img src="raid.jpg" border="0" title="raid">
+	</div>
+
+
+</div>
+</div>
+
+
+
+
+
+
+<br/><br/>
+<hr>
+<br/>
+
+<div align="center">
+	<a href="index.html"><h3>Oracle DBA</h3></a>
+</div>
+
+	<div align="center">
+		<strong>tags:</strong> <a href="index.html">Oracle Linux</a> || 
+		<a href="sitemap.php.html">Oracle DataBase</a> ||
+		<a href="sitemap.php.html">Oracle Weblogic</a> || 
+		<a href="http://plsql.ru/">SQL & PL/SQL</a> || 
+ 		<a href="http://javadev.ru/">Java</a> || 
+ 		<a href="http://oracle-adf.ru/">Oracle ADF</a>
+	</div>
+
+	
+	<div align="center">
+		Исходные коды сайта oracle-dba.ru на <a href="https://github.com/plsql/oracle-dba.ru">github</a>
+	</div>
+
+
+<!---------------->
+<!-- Page Info  -->
+
+<!-- Эта страница была загружена с сайта: -->
+<!-- http://prev.oracle-dba.ru/index.php -->
+
+<!----------------------->
+<!-- Google Analinics  -->
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-4894954-13']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+
+<!-- Google Analinics  -->
+<!----------------------->
+
+<!-- Дата обращения к странице -->
+<!-- 05/08/2015 -->
+
+<!--/ Page Info  -->
+<!---------------->
+
+
+
+
+
+</body>
+
+</html>

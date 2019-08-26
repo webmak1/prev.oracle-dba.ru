@@ -1,0 +1,320 @@
+﻿<html>
+
+
+
+<head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta name="keywords" content="Oracle DBA, RAC, ASM, DataGuard"/>
+	<meta name="description" content="Администрирование и разработка баз данных Oracle"/>
+
+		<title>Oracle DBA</title>
+
+		 <link rel="stylesheet" href="http://prev.oracle-dba.ru/database/linux/6.3/oracle/11.2/install/hb.css" type="text/css">
+		 <link rel="stylesheet" href="http://prev.oracle-dba.ru/database/linux/6.3/oracle/11.2/install/html.css" type="text/css">
+
+
+
+                  <link rel="stylesheet" href="../../../../../../css/bootstrap.css">
+                  <link rel="stylesheet" href="../../../../../../css/app.css">
+
+
+
+				<style type="text/css">
+				   .text {
+
+					padding-left: 100px;
+					padding-right: 100px;
+
+				   }
+
+				   .link {
+
+					padding-left: 100px;
+					padding-right: 100px;
+
+				   }
+
+				</style>
+
+
+        <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'oracle-dba'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function () {
+            var s = document.createElement('script'); s.async = true;
+            s.type = 'text/javascript';
+            s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+        </script>
+
+
+
+<style type="text/css">
+ .spoiler_body {display:none; cursor:pointer;}
+</style>
+
+
+	</head>
+
+
+<body>
+
+
+
+
+<br/><br/>
+
+<div class="link">
+<table width="100%" border="0">
+<tr>
+<td align="left" width="40%">
+<a href="../../../../../../index.html"><img src="../../../../../../remote_oracle_dba.jpeg" border="0" alt="Oracle DBA"
+/></a>
+</td>
+
+
+<td align="center">
+<a href="../../../../../../chat.php.html">Заходи в WEBCHAT админов Oracle<br/>
+Здесь старый добрый IRC</a>
+</td>
+
+<td align="right" width="33%">
+<a href="../../../../../../job/remote_oracle_dba_on_project/index.html"><img src="../../../../../../remote-oracle-dba-services.jpg" border="0"
+alt="Remote Oracle DBA Services"
+height="" width="300px" /></a>
+</td>
+
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+
+
+<div id="cse" style="width: 100%;">Loading</div>
+<script src="http://www.google.ru/jsapi" type="text/javascript"></script>
+<script type="text/javascript">
+  google.load('search', '1', {language : 'ru', style : google.loader.themes.V2_DEFAULT});
+  google.setOnLoadCallback(function() {
+    var customSearchOptions = {};  var customSearchControl = new google.search.CustomSearchControl(
+      '006168197569183510807:fzridi5qcxw', customSearchOptions);
+    customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+    customSearchControl.draw('cse');
+  }, true);
+</script>
+
+
+<div align="center" style="color:red">
+Работа над этой версией сайта остановлена. Рекомендуется обратиться к новой версии сайта <a href="http://oracle-dba.ru">oracle-dba.ru</a> на котором в дальшейшем будут исправляться все ошибки и неточности.
+</div>
+
+<br/>
+
+<div align="center">
+<a href="../../../../../../sitemap.php.html">Карта сайта</a>
+</div>
+
+
+
+<br/><br/><br/>
+<h2>[Инсталляция Oracle 11.2]: Расширение табличных пространств (создание дополнительных файлов для табличных пространств). </h2>
+
+
+<br/><br/>
+       <div class="linuxCommand">
+	$ sqlplus / as sysdba
+       </div>
+
+
+
+
+<br/><br/>
+Посмотреть какие файлы базы данных используются базой данных и где они расположены:
+<br/><br/>
+       <div class="linuxCommand">
+SQL> set linesize 200;<br/>
+SQL> set pagesize 0;<br/>
+SQL> col name format a40;<br/>
+SQL> SELECT file#, name, status<br/>
+FROM v$datafile;<br/>
+       </div>
+
+
+
+<br/><br/>
+1) Создание нового табличное пространство для индексов и данных:
+<br/><br/>
+       <div class="linuxCommand">
+SQL> CREATE TABLESPACE "MY_DATA"
+DATAFILE '/u02/oradata/ora112/my_data01.dbf' SIZE 2G AUTOEXTEND OFF;
+       </div>
+
+
+<br/><br/>
+При необходимости, можно добавить дополнительное место для данных (когда будет такая необходимость) следующими командами:
+<br/><br/>
+       <div class="linuxCommand">
+SQL> ALTER TABLESPACE “MY_DATA”
+ADD DATAFILE  '/u02/oradata/ora112/my_data02.dbf' SIZE 2G AUTOEXTEND OFF;
+       </div>
+
+<br/><br/>
+
+       <div class="linuxCommand">
+SQL> CREATE TABLESPACE "MY_INDEXES"
+DATAFILE '/u02/oradata/ora112/my_indexes01.dbf' SIZE 2G AUTOEXTEND OFF;
+       </div>
+
+
+
+
+<br/><br/>
+При необходимости, можно добавить дополнительное место для индексов (когда будет такая необходимость) следующими командами:
+<br/><br/>
+       <div class="linuxCommand">
+SQL> ALTER TABLESPACE “MY_INDEXES”
+ADD DATAFILE  '/u02/oradata/ora112/my_indexes02.dbf' SIZE 2G AUTOEXTEND OFF;
+       </div>
+
+
+<br/><br/>
+<hr/>
+<br/><br/>
+
+2) Иногда, нужно создать дополнительное табличное пространство для табличного пространства отмены (undo).
+<br/><br/>
+
+       <div class="linuxCommand">
+SQL> CREATE undo tablespace "UNDO" datafile '/u02/oradata/ora112/undo01.dbf' size 1G autoextend off;
+       </div>
+
+
+
+
+<br/><br/>
+Определяю созданное табличное пространство, как пространство по умолчанию
+<br/><br/>
+
+       <div class="linuxCommand">
+SQL> ALTER SYSTEM SET UNDO_TABLESPACE = "UNDO";
+       </div>
+
+
+
+<br/><br/>
+Удаляю старое табличное пространство
+<br/><br/>
+
+       <div class="linuxCommand">
+SQL> drop tablespace UNDOTBS1;
+       </div>
+
+
+<br/><br/>
+<hr/>
+<br/><br/>
+
+3) Создать новое табличное пространство для временных данных.
+<br/><br/>
+
+       <div class="linuxCommand">
+SQL> CREATE TEMPORARY TABLESPACE "MY_TEMP" 
+TEMPFILE '/u02/oradata/ora112/my_temp01.dbf' SIZE 2G AUTOEXTEND OFF;
+       </div>
+
+
+
+<br/><br/>
+Добавить дополнительный файл для временных табличных пространств.
+<br/><br/>
+
+       <div class="linuxCommand">
+SQL> ALTER TABLESPACE “MY_TEMP”
+ADD TEMPFILE '/u02/oradata/ora112/my_temp02.dbf' SIZE 2G AUTOEXTEND OFF; 
+       </div>
+
+
+<br/><br/>
+
+       <div class="linuxCommand">
+SQL> quit
+       </div>
+
+
+</div>		
+		
+	
+
+
+
+
+
+<br/><br/>
+<hr>
+<br/>
+
+<div align="center">
+	<a href="../../../../../../index.html"><h3>Oracle DBA</h3></a>
+</div>
+
+	<div align="center">
+		<strong>tags:</strong> <a href="../../../../../../index.html">Oracle Linux</a> || 
+		<a href="../../../../../../sitemap.php.html">Oracle DataBase</a> ||
+		<a href="../../../../../../sitemap.php.html">Oracle Weblogic</a> || 
+		<a href="http://plsql.ru/">SQL & PL/SQL</a> || 
+ 		<a href="http://javadev.ru/">Java</a> || 
+ 		<a href="http://oracle-adf.ru/">Oracle ADF</a>
+	</div>
+
+	
+	<div align="center">
+		Исходные коды сайта oracle-dba.ru на <a href="https://github.com/plsql/oracle-dba.ru">github</a>
+	</div>
+
+
+<!---------------->
+<!-- Page Info  -->
+
+<!-- Эта страница была загружена с сайта: -->
+<!-- http://prev.oracle-dba.ru/database/linux/6.3/oracle/11.2/install/oracle_add_datafiles.php -->
+
+<!----------------------->
+<!-- Google Analinics  -->
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-4894954-13']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+
+<!-- Google Analinics  -->
+<!----------------------->
+
+<!-- Дата обращения к странице -->
+<!-- 05/08/2015 -->
+
+<!--/ Page Info  -->
+<!---------------->
+
+
+
+
+
+</body>
+
+</html>

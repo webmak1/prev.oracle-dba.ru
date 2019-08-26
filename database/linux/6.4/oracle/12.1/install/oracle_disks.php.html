@@ -1,0 +1,343 @@
+﻿<html>
+
+
+
+<head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta name="keywords" content="Oracle DBA, RAC, ASM, DataGuard"/>
+	<meta name="description" content="Администрирование и разработка баз данных Oracle"/>
+
+		<title>Oracle DBA</title>
+
+		 <link rel="stylesheet" href="http://prev.oracle-dba.ru/database/linux/6.4/oracle/12.1/install/hb.css" type="text/css">
+		 <link rel="stylesheet" href="http://prev.oracle-dba.ru/database/linux/6.4/oracle/12.1/install/html.css" type="text/css">
+
+
+
+                  <link rel="stylesheet" href="../../../../../../css/bootstrap.css">
+                  <link rel="stylesheet" href="../../../../../../css/app.css">
+
+
+
+				<style type="text/css">
+				   .text {
+
+					padding-left: 100px;
+					padding-right: 100px;
+
+				   }
+
+				   .link {
+
+					padding-left: 100px;
+					padding-right: 100px;
+
+				   }
+
+				</style>
+
+
+        <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'oracle-dba'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function () {
+            var s = document.createElement('script'); s.async = true;
+            s.type = 'text/javascript';
+            s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+        </script>
+
+
+
+<style type="text/css">
+ .spoiler_body {display:none; cursor:pointer;}
+</style>
+
+
+	</head>
+
+
+<body>
+
+
+
+
+<br/><br/>
+
+<div class="link">
+<table width="100%" border="0">
+<tr>
+<td align="left" width="40%">
+<a href="../../../../../../index.html"><img src="../../../../../../remote_oracle_dba.jpeg" border="0" alt="Oracle DBA"
+/></a>
+</td>
+
+
+<td align="center">
+<a href="../../../../../../chat.php.html">Заходи в WEBCHAT админов Oracle<br/>
+Здесь старый добрый IRC</a>
+</td>
+
+<td align="right" width="33%">
+<a href="../../../../../../job/remote_oracle_dba_on_project/index.html"><img src="../../../../../../remote-oracle-dba-services.jpg" border="0"
+alt="Remote Oracle DBA Services"
+height="" width="300px" /></a>
+</td>
+
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+
+
+<div id="cse" style="width: 100%;">Loading</div>
+<script src="http://www.google.ru/jsapi" type="text/javascript"></script>
+<script type="text/javascript">
+  google.load('search', '1', {language : 'ru', style : google.loader.themes.V2_DEFAULT});
+  google.setOnLoadCallback(function() {
+    var customSearchOptions = {};  var customSearchControl = new google.search.CustomSearchControl(
+      '006168197569183510807:fzridi5qcxw', customSearchOptions);
+    customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+    customSearchControl.draw('cse');
+  }, true);
+</script>
+
+
+<div align="center" style="color:red">
+Работа над этой версией сайта остановлена. Рекомендуется обратиться к новой версии сайта <a href="http://oracle-dba.ru">oracle-dba.ru</a> на котором в дальшейшем будут исправляться все ошибки и неточности.
+</div>
+
+<br/>
+
+<div align="center">
+<a href="../../../../../../sitemap.php.html">Карта сайта</a>
+</div>
+
+
+
+<br/><br/><br/>
+<h2><a href="index.php.html">[Инсталляция Oracle 12.1]</a>: Подготовка дисков к инсталляции базы данных</h2>
+
+<br/><br/>
+
+В каталоге /u01 будет храниться программное обеспечение для работы с базами данных (Database Software) а в каталоге /u02 файлы базы данных.
+
+
+<div class="linuxCommand">
+# ls /dev/sd*
+</div>
+
+<br/>
+
+<div class="linuxCode">
+/dev/sda   /dev/sda2  /dev/sdc  /dev/sde  /dev/sdg
+/dev/sda1  /dev/sdb   /dev/sdd  /dev/sdf  /dev/sdh
+</div>
+
+
+
+<br/><br/>
+Создаем разделы на имеющихся у нас жестких дисках.
+<br/><br/>
+
+
+<div class="linuxCommand">
+# fdisk /dev/sdb<br/>
+# fdisk /dev/sdc<br/>
+# fdisk /dev/sdd<br/>
+</div>
+
+<br/><br/>
+
+<div class="linuxCode">
+The number of cylinders for this disk is set to 5221.
+There is nothing wrong with that, but this is larger than 1024,
+and could in certain setups cause problems with:
+1) software that runs at boot time (e.g., old versions of LILO)
+2) booting and partitioning software from other OSs
+ (e.g., DOS FDISK, OS/2 FDISK)
+
+Command (m for help): n
+Command action
+ e   extended
+ p   primary partition (1-4)
+[p]
+Partition number (1-4): [1]
+First cylinder (1-5221, default 1): [Enter]
+Using default value 1
+Last cylinder or +size or +sizeM or +sizeK (1-5221, default 5221): [Enter]
+Using default value 5221
+
+Command (m for help): [w]
+The partition table has been altered!
+
+Calling ioctl() to re-read partition table.
+Syncing disks.
+
+</div>
+
+
+<br/><br/>
+Создаем файловую систему на созданных разделах.
+<br/><br/>
+
+
+<div class="linuxCommand">
+
+# mkfs.ext4 /dev/sdb1<br/>
+# mkfs.ext4 /dev/sdc1<br/>
+# mkfs.ext4 /dev/sdd1<br/>
+</div>
+
+
+<br/><br/>
+
+
+<div class="linuxCommand">
+
+# mkdir /u01<br/>
+# mkdir /u02<br/>
+# mkdir /u03<br/>
+</div>
+
+
+
+<br/><br/>
+Записываем информацию о том, куда следует монтировать разделы при загрузки операционной системы.
+<br/><br/>
+<div class="linuxCommand">
+
+# cp /etc/fstab /etc/fstab.bkp<br/>
+# echo "/dev/sdb1 /u01 ext4 defaults 1 2" >> /etc/fstab<br/>
+# echo "/dev/sdc1 /u02 ext4 defaults 1 2" >> /etc/fstab<br/>
+# echo "/dev/sdd1 /u03 ext4 defaults 1 2" >> /etc/fstab<br/>
+
+</div>
+
+
+<br/><br/>
+
+
+<div class="linuxCommand">
+
+# mount /u01<br/>
+# mount /u02<br/>
+# mount /u03<br/>
+
+</div>
+
+
+<br/><br/>
+Проверка
+<br/><br/>
+<div class="linuxCommand">
+# mount | grep sdb1<br/>
+# mount | grep sdc1<br/>
+# mount | grep sdd1<br/>
+</div>
+
+
+
+<br/><br/>
+<hr/>
+<br/><br/>
+
+
+
+          <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = 'oracle-dba'; // required: replace example with your forum shortname
+
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+
+
+
+<br/><br/>
+<br/><br/>
+
+
+</div>
+
+
+
+
+
+
+
+<br/><br/>
+<hr>
+<br/>
+
+<div align="center">
+	<a href="../../../../../../index.html"><h3>Oracle DBA</h3></a>
+</div>
+
+	<div align="center">
+		<strong>tags:</strong> <a href="../../../../../../index.html">Oracle Linux</a> || 
+		<a href="../../../../../../sitemap.php.html">Oracle DataBase</a> ||
+		<a href="../../../../../../sitemap.php.html">Oracle Weblogic</a> || 
+		<a href="http://plsql.ru/">SQL & PL/SQL</a> || 
+ 		<a href="http://javadev.ru/">Java</a> || 
+ 		<a href="http://oracle-adf.ru/">Oracle ADF</a>
+	</div>
+
+	
+	<div align="center">
+		Исходные коды сайта oracle-dba.ru на <a href="https://github.com/plsql/oracle-dba.ru">github</a>
+	</div>
+
+
+<!---------------->
+<!-- Page Info  -->
+
+<!-- Эта страница была загружена с сайта: -->
+<!-- http://prev.oracle-dba.ru/database/linux/6.4/oracle/12.1/install/oracle_disks.php -->
+
+<!----------------------->
+<!-- Google Analinics  -->
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-4894954-13']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+
+<!-- Google Analinics  -->
+<!----------------------->
+
+<!-- Дата обращения к странице -->
+<!-- 05/08/2015 -->
+
+<!--/ Page Info  -->
+<!---------------->
+
+
+
+
+
+</body>
+
+</html>

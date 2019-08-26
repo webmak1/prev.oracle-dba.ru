@@ -1,0 +1,371 @@
+﻿<html>
+
+
+
+<head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta name="keywords" content="Oracle DBA, RAC, ASM, DataGuard"/>
+	<meta name="description" content="Администрирование и разработка баз данных Oracle"/>
+
+		<title>Oracle DBA</title>
+
+		 <link rel="stylesheet" href="http://prev.oracle-dba.ru/sitemap/hb.css" type="text/css">
+		 <link rel="stylesheet" href="http://prev.oracle-dba.ru/sitemap/html.css" type="text/css">
+
+
+
+                  <link rel="stylesheet" href="css/bootstrap.css">
+                  <link rel="stylesheet" href="css/app.css">
+
+
+
+				<style type="text/css">
+				   .text {
+
+					padding-left: 100px;
+					padding-right: 100px;
+
+				   }
+
+				   .link {
+
+					padding-left: 100px;
+					padding-right: 100px;
+
+				   }
+
+				</style>
+
+
+        <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'oracle-dba'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function () {
+            var s = document.createElement('script'); s.async = true;
+            s.type = 'text/javascript';
+            s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+        </script>
+
+
+
+<style type="text/css">
+ .spoiler_body {display:none; cursor:pointer;}
+</style>
+
+
+	</head>
+
+
+<body>
+
+
+
+
+<br/><br/>
+
+<div class="link">
+
+
+<table width="100%" border="0">
+<tr>
+<td align="left" width="40%">
+<a href="index.html"><img src="remote_oracle_dba.jpeg" border="0" alt="Oracle DBA"
+/></a>
+</td>
+
+
+<td align="center">
+<a href="chat.php.html">Заходи в WEBCHAT админов Oracle<br/>
+Здесь старый добрый IRC</a>
+</td>
+
+<td align="right" width="33%">
+<a href="job/remote_oracle_dba_on_project/index.html"><img src="remote-oracle-dba-services.jpg" border="0"
+alt="Remote Oracle DBA Services"
+height="" width="300px" /></a>
+</td>
+
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+
+
+<div id="cse" style="width: 100%;">Loading</div>
+<script src="http://www.google.ru/jsapi" type="text/javascript"></script>
+<script type="text/javascript">
+  google.load('search', '1', {language : 'ru', style : google.loader.themes.V2_DEFAULT});
+  google.setOnLoadCallback(function() {
+    var customSearchOptions = {};  var customSearchControl = new google.search.CustomSearchControl(
+      '006168197569183510807:fzridi5qcxw', customSearchOptions);
+    customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+    customSearchControl.draw('cse');
+  }, true);
+</script>
+
+
+<div align="center" style="color:red">
+Работа над этой версией сайта остановлена. Рекомендуется обратиться к новой версии сайта <a href="http://oracle-dba.ru">oracle-dba.ru</a> на котором в дальшейшем будут исправляться все ошибки и неточности.
+</div>
+
+<br/>
+
+<div align="center">
+<a href="sitemap.php.html">Карта сайта</a>
+</div>
+
+<br/>
+<br/><br/>
+
+
+
+<h1>Oracle DataBase</h1>
+
+<br/>
+<h3>Введение:</h3>
+
+<a href="docs/intro/index.html">Пара слов о базах данных Oracle</a><br/>
+<a href="docs/library/index.html">С чего начать изучение Oracle?</a> (Каталог обучающих материалов)<br/>
+<a href="docs/links/index.html">Ссылки на документацию по Oracle</a><br/>
+<a href="docs/webinars/index.html">Записи вебинаров по Oracle.</a><br/>
+<a href="oracle-dba-questions-on-interview.php.html">Вопросы, которые задают претендентам на позицию Oracle DBA на собеседованиях</a><br/>
+<a href="job/index.html">Требования к кандидатам на позицию Oracle DBA в иностранных компаниях</a><br/>
+<a href="cert/index.php.html">Сертификация Oracle</a><br/>
+
+<br/><br/>
+<h3>Основы:</h3>
+
+<a href="how_to_install_oracle_database/index.html"><strong>Инсталляция Oracle DataBase</strong></a><br/>
+<a href="database/basics/startup_and_shutdown_oracle_instance/index.html">Режимы запуска и останова базы данных Oracle</a><br/>
+
+
+<br/><br/>
+<h3>Архитектура баз данных Oracle:</h3>
+
+
+<a href="database/basics/instance/index.html">Экземпляр базы данных Oracle (Oracle DataBase Instance)</a><br/>
+<a href="database/basics/oracle_database_files/index.html">Файлы базы данных Oracle (Oracle DataBase Files)</a><br/>
+<a href="database/basics/oracle_database_memory/index.html">Структуры памяти Oracle</a><br/>
+<a href="database/basics/oracle_database_proceses/index.html">Процессы Oracle (Oracle DataBase Proceses)</a><br/>
+<a href="database/basics/oracle_database_transactions/index.html">Простая транзация базы данных Oracle</a><br/>
+
+
+<br/><br/>
+<h3>Управление табличными пространствами:</h3>
+<a href="database/basics/oracle_database_tablespaces/index.html">Табличные пространства Oracle </a><br/>
+<a href="database/basics/oracle_database_tablespaces/how_to_create_new_tablespace/index.html">Создание табличных пространств</a><br/>
+<a href="database/basics/oracle_database_tablespaces/how_to_add_additional_tablespace/index.html">Расширение табличных пространств (создание дополнительных файлов для табличных пространств)</a><br/>
+<a href="database/basics/oracle_segments_extents_and_blocks/index.html">Сегменты > Экстенты > Блоки</a><br/>
+<a href="oracle_database_undo_tablespaces.php.html">Команды для анализа использования UNDOTBS</a><br/>
+
+<br/><br/>
+<h3>Индексы:</h3>
+
+<a href="database/basics/oracle_database_indexes/index.html">Индексы Oracle </a><br/>
+
+<br/><br/>
+<h3>Пользователи, схемы и их сессии к базе данных Oracle:</h3>
+
+
+<a href="database/basics/oracle_schemas/index.html">Схемы Oracle</a><br/>
+<a href="database/basics/oracle_database_permissions/index.html">Системные и объектные полномочия пользователей в базе данных Oracle</a><br/>
+<a href="database/basics/oracle_database_sessions/index.html">Сессии к базе данных Oracle</a><br/>
+
+
+<br/><br/>
+<h3>Oracle Networking:</h3>
+<a href="database/basics/oracle_networking/index.html">Конфигурационные файлы listener.ora, tnsnames.ora и утилита LSNRCTL</a><br/>
+
+
+<br/><br/>
+<h3>Резервное копирование баз данных Oracle:</h3>
+<a href="database/basics/oracle_data_pump/index.html">Утилиты экспорта и импорта данных Data Pump (Резервное копирование объектов схемы)</a><br/>
+<a href="oracle_11_transportable_tablespaces.php.html">Транспортируемые табличные пространства в Oracle 11g</a><br/>
+<a href="database/basics/oracle_database_backup/index.html">Резервное копирование баз данных Oracle</a><br/>
+<a href="database/basics/oracle_rman/index.html">Утилита RMAN (Recovery Manager)</a><br/>
+<a href="oracle_rman_backup.php.html">Создание резервных копий с помощью утилиты RMAN (Recovery Manager)</a><br/>
+<a href="oracle_rman_restore_and_recover.php.html">Восстановление из резервой копий с помощью утилиты RMAN (Recovery Manager)</a><br/>
+
+<a href="oracle_rman_delete.php.html">Удаление объектов RMAN (Recovery Manager)</a><br/>
+
+<a href="low_space_in_fra.php.html">Недостаточно свободного места в Fast Recovery Area</a><br/>
+
+
+<br/><br/>
+<h3>Восстановление файлов и данных:</h3>
+
+<a href="flashback_queries.php.html">FlashBack queries</a><br/>
+
+<a href="oracle_database_file_was_lost.php.html">Потеря файла</a><br/>
+
+<br/><br/>
+<h3>Настройка производительности баз данных Oracle:</h3>
+<a href="database/performance/index.html">Выбор между производительностью и надежностью ОRАСLЕ</a><br/>
+<a href="oracle_database_session_statistics.php.html">Собрать статистику пользовательской сессии</a><br/>
+
+
+<br/><br/>
+<h3>Мониторинг:</h3>
+<a href="http://odba.ru/showthread.php?t=744">Инсталляция Oracle Enterprise Manager Cloud control 12c в операционной системе Oracle Linux 5.8 x86 64 bit</a><br/>
+
+
+<br/><br/>
+<h3>Высокая готовность и отказоустойчивость:</h3>
+<a href="http://odba.ru/showthread.php?t=469">Oracle Data Guard: Развертывание физического Standby средствами Oracle Database</a><br/>
+<a href="http://prev.oracle-dba.ru/database/rac/11.2/install/">Инсталляция Oracle DataBase Real Application Cluster 11G R2 x86 64 bit в операционной системе Oracle Linux 5.8 x86 64 bit</a><br/>
+
+<br/><br/>
+
+<h3>Инсталляция Java (JDK) на Linux сервер</h3>
+<a href="install/jdk/index.html">jdk-7u21-linux-x64</a><br/>
+
+
+
+<br/><br/>
+<h3>Разное:</h3>
+
+<a href="oracle_database_sheduler.php.html">Sheduler Oracle</a><br/>
+<a href="poisk-dublikatov.php.html">Поиск одинаковых записей в базе данных</a><br/>
+<a href="oracle_err_catcher.php.html">Создание ловца ошибок (тестим)</a><br/>
+
+<br/><br/>
+
+<h3>Некоторые запросы к базе данных Oracle:</h3>
+<a href="query.php.html">Некоторые запросы к базе данных Oracle</a><br/>
+
+
+<hr>
+
+<h3>Некоторые команды Linux:</h3>
+<a href="linux/index.html">Некоторые команды Linux</a><br/>
+
+
+<hr>
+
+<h1>Oracle Fusion Middleware</h1>
+
+
+<h3>Сервер приложений Oracle Weblogic:</h3>
+<a href="appserv/weblogic/weblogic_versions.php.html">Версии Weblogic</a><br/>
+<a href="appserv/weblogic/weblogic_installation.php.html">Инсталляция сервера приложений Oracle Weblogic в операционной системе Oracle Linux</a><br/>
+<a href="appserv/weblogic/weblogic_patches.php.html">О патчах для Oracle WebLogic Server</a><br/>
+<a href="appserv/weblogic/seminar/index.html">Практический обучающий курс для партнеров Oracle по серверу приложений Weblogic</a><br/>
+
+<br/><br/>
+<h3>Oracle Business Intelligence:</h3>
+
+
+<a href="install/business-intelligence/index.html">Инсталляция Oracle Business Intelligence Enterprise Edition (OBIEE)</a><br/>
+
+<hr>
+
+
+<h1>Программирование для баз данных Oracle:</h1>
+<ul>
+	<li><a href="http://plsql.ru/">Программирование на PL/SQL</a></li>
+	<li><a href="http://oracle-adf.ru/">Программирование на Java с использованием технологии Oracle ADF</a></li>
+</ul>
+
+<br/><br/>
+<hr/>
+<br/><br/>
+
+
+
+
+<div style="padding:10px; border:thin solid black;">
+
+	<h3>Если кто захочет присоединиться и добавить свои знания на сайт.</h3>
+
+	Если вы профессионально занимаетесь Oracle или планируете профессионально им заниматься, можете подключиться к наполнению сайта новыми знаниями.
+
+	<br/><br/>
+
+	Если вы добавите своих знаний в общую копилку, возможно они помогут какому-нибудь другому Oracle DBA или вы сами сможете, при необходимости, обратиться к ним, когда они понадобятся.
+
+	<br/><br/>
+	<a href="website/index.html">Более подробно написано здесь.</a>
+
+
+	</div>
+
+
+</div>
+
+
+
+
+
+
+
+<br/><br/>
+<hr>
+<br/>
+
+<div align="center">
+	<a href="index.html"><h3>Oracle DBA</h3></a>
+</div>
+
+	<div align="center">
+		<strong>tags:</strong> <a href="index.html">Oracle Linux</a> || 
+		<a href="sitemap.php.html">Oracle DataBase</a> ||
+		<a href="sitemap.php.html">Oracle Weblogic</a> || 
+		<a href="http://plsql.ru/">SQL & PL/SQL</a> || 
+ 		<a href="http://javadev.ru/">Java</a> || 
+ 		<a href="http://oracle-adf.ru/">Oracle ADF</a>
+	</div>
+
+	
+	<div align="center">
+		Исходные коды сайта oracle-dba.ru на <a href="https://github.com/plsql/oracle-dba.ru">github</a>
+	</div>
+
+
+<!---------------->
+<!-- Page Info  -->
+
+<!-- Эта страница была загружена с сайта: -->
+<!-- http://prev.oracle-dba.ru/sitemap/index.php -->
+
+<!----------------------->
+<!-- Google Analinics  -->
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-4894954-13']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+
+<!-- Google Analinics  -->
+<!----------------------->
+
+<!-- Дата обращения к странице -->
+<!-- 05/08/2015 -->
+
+<!--/ Page Info  -->
+<!---------------->
+
+
+
+
+
+</body>
+
+</html>

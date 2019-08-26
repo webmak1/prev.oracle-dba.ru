@@ -1,0 +1,432 @@
+﻿<html>
+
+
+
+<head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta name="keywords" content="Oracle DBA, RAC, ASM, DataGuard"/>
+	<meta name="description" content="Администрирование и разработка баз данных Oracle"/>
+
+		<title>Oracle DBA</title>
+
+		 <link rel="stylesheet" href="http://prev.oracle-dba.ru/install/oracle_client_installation_on_linux/hb.css" type="text/css">
+		 <link rel="stylesheet" href="http://prev.oracle-dba.ru/install/oracle_client_installation_on_linux/html.css" type="text/css">
+
+
+
+                  <link rel="stylesheet" href="../../css/bootstrap.css">
+                  <link rel="stylesheet" href="../../css/app.css">
+
+
+
+				<style type="text/css">
+				   .text {
+
+					padding-left: 100px;
+					padding-right: 100px;
+
+				   }
+
+				   .link {
+
+					padding-left: 100px;
+					padding-right: 100px;
+
+				   }
+
+				</style>
+
+
+        <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'oracle-dba'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function () {
+            var s = document.createElement('script'); s.async = true;
+            s.type = 'text/javascript';
+            s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+        </script>
+
+
+
+<style type="text/css">
+ .spoiler_body {display:none; cursor:pointer;}
+</style>
+
+
+	</head>
+
+
+<body>
+
+
+
+
+<br/><br/>
+
+<div class="link">
+<table width="100%" border="0">
+<tr>
+<td align="left" width="40%">
+<a href="../../index.html"><img src="../../remote_oracle_dba.jpeg" border="0" alt="Oracle DBA"
+/></a>
+</td>
+
+
+<td align="center">
+<a href="../../chat.php.html">Заходи в WEBCHAT админов Oracle<br/>
+Здесь старый добрый IRC</a>
+</td>
+
+<td align="right" width="33%">
+<a href="../../job/remote_oracle_dba_on_project/index.html"><img src="../../remote-oracle-dba-services.jpg" border="0"
+alt="Remote Oracle DBA Services"
+height="" width="300px" /></a>
+</td>
+
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+
+
+<div id="cse" style="width: 100%;">Loading</div>
+<script src="http://www.google.ru/jsapi" type="text/javascript"></script>
+<script type="text/javascript">
+  google.load('search', '1', {language : 'ru', style : google.loader.themes.V2_DEFAULT});
+  google.setOnLoadCallback(function() {
+    var customSearchOptions = {};  var customSearchControl = new google.search.CustomSearchControl(
+      '006168197569183510807:fzridi5qcxw', customSearchOptions);
+    customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+    customSearchControl.draw('cse');
+  }, true);
+</script>
+
+
+<div align="center" style="color:red">
+Работа над этой версией сайта остановлена. Рекомендуется обратиться к новой версии сайта <a href="http://oracle-dba.ru">oracle-dba.ru</a> на котором в дальшейшем будут исправляться все ошибки и неточности.
+</div>
+
+<br/>
+
+<div align="center">
+<a href="../../sitemap.php.html">Карта сайта</a>
+</div>
+
+
+
+<br/><br/><br/>
+<h2>[Инсталляция Oracle Instant Client 11.2 в Oracle Linux]</h2>
+
+<br/><br/>
+
+
+
+Distrib:<br/>
+http://www.oracle.com/technetwork/topics/linuxx86-64soft-092277.html
+
+<br/><br/>
+
+Info:<br/>
+http://docs.oracle.com/cd/E11882_01/server.112/e16604/apd.htm
+
+
+<br/><br/>
+
+<ul>
+	<li>instantclient-basic-linux.x64-11.2.0.3.0.zip</li>
+	<li>instantclient-sqlplus-linux.x64-11.2.0.3.0.zip</li>
+</ul>
+
+
+<br/><br/>
+
+Архивы следует разархивировать в 1 каталог.<br/>
+Иначе возможно появится сообщение:<br/>
+SP2-0667: Message file sp1<lang>.msb not found<br/>
+
+
+<br/><br/>
+
+<div class="linuxCommand">
+
+# mkdir -p /u01/app/oracle/instantclient<br/>
+<br/>
+# unzip instantclient-basic-linux.x64-11.2.0.3.0.zip<br/>
+# unzip instantclient-sqlplus-linux.x64-11.2.0.3.0.zip<br/>
+# mv instantclient_11_2/ 11.2<br/>
+# mv 11.2/ /u01/app/oracle/instantclient<br/><br/>
+
+# chown -R oracle11 /u01/app/oracle/instantclient/
+
+
+ </div>
+
+<br/><br/>
+
+<div class="linuxCommand">
+
+# vi /etc/yum.repos.d/oracleLinuxRepoINTERNET.repo
+
+
+ </div>
+
+<br/><br/>
+
+       <div class="linuxCode">
+        [OEL_INTERNET]
+	name=Oracle Enterprise Linux $releasever - $basearch
+	baseurl=http://public-yum.oracle.com/repo/OracleLinux/OL6/latest/$basearch/
+	gpgkey=http://public-yum.oracle.com/RPM-GPG-KEY-oracle-ol6
+	gpgcheck=1
+	enabled=1
+       </div>
+
+<br/><br/>
+
+
+
+<div class="linuxCommand">
+
+# yum install -y \<br/>
+gcc \<br/>
+make \<br/>
+readline-devel.x86_64<br/>
+
+
+ </div>
+
+
+
+<br/><br/>
+
+
+<div class="linuxCommand">
+
+# yum install -y libaio-devel
+
+
+ </div>
+
+<br/><br/>
+
+<div class="linuxCommand">
+
+# cd /tmp<br/>
+# wget http://utopia.knoware.nl/~hlub/uck/rlwrap/rlwrap-0.37.tar.gz<br/><br/>
+
+# tar zxvf rlwrap-0.37.tar.gz<br/>
+# cd rlwrap-0.37<br/>
+# ./configure<br/><br/>
+
+# make && make check && make install
+
+
+ </div>
+
+
+<br/><br/>
+
+<div class="linuxCommand">
+
+Если с sqlplus будет работать один конкретный пользователь. Данные записи следует добавить в его профиль.<br/><br/>
+
+# su - oracle11
+
+
+ </div>
+
+
+<br/><br/>
+
+<div class="linuxCommand">
+
+
+$ vi ~/.bash_profile
+
+
+ </div>
+
+
+<br/><br/>
+
+       <div class="linuxCode">
+	#################################
+	## Oracle Instant Client
+
+
+	export SQLPATH=/u01/app/oracle/instantclient/11.2
+	export NLS_LANG=AMERICAN_AMERICA.AL32UTF8
+	export TNS_ADMIN=${SQLPATH}
+	export LD_LIBRARY_PATH=${SQLPATH}
+	export PATH=${SQLPATH}:${PATH}
+
+		 alias sqlplus='rlwrap sqlplus'
+		 alias rman='rlwrap rman'
+
+	#################################
+       </div>
+
+<br/><br/>
+
+
+<br/><br/>
+
+<div class="linuxCommand">
+
+$ source ~/.bash_profile
+
+
+ </div>
+
+
+<br/><br/>
+
+<div class="linuxCommand">
+
+# sqlplus /nolog<br/>
+SQL> conn system/system@oracle112:1521/ora112.localdomain<br/>
+Connected.
+
+
+ </div>
+
+
+
+<br/><br/>
+<hr/>
+<br/><br/>
+
+<h3>Создание файла (tnsnames.ora) с параметрами подключения к базе данных </h3>
+
+
+<br/><br/>
+
+<div class="linuxCommand">
+
+
+# vi /u01/app/oracle/instantclient/11.2/tnsnames.ora
+
+ </div>
+
+
+<br/><br/>
+
+       <div class="linuxCode">
+		oracle11 =
+		  (DESCRIPTION =
+		    (ADDRESS = (PROTOCOL = TCP)(HOST = oracle112.localdomain)(PORT = 1521))
+		    (CONNECT_DATA =
+		      (SERVER = DEDICATED)
+		      (SERVICE_NAME = ora112.localdomain)
+		    )
+		  )
+
+       </div>
+
+<br/><br/>
+
+oracle112.localdomain - запись в DNS или HOSTS
+
+<br/><br/>
+
+<div class="linuxCommand">
+
+
+# sqlplus /nolog
+
+ </div>
+
+
+<br/><br/>
+
+<div class="linuxCommand">
+
+
+SQL> conn system/system@oracle11 <br/> 
+Connected.
+
+ </div>
+
+ 
+
+</pre>
+
+</div>		
+		
+	
+
+
+
+
+
+<br/><br/>
+<hr>
+<br/>
+
+<div align="center">
+	<a href="../../index.html"><h3>Oracle DBA</h3></a>
+</div>
+
+	<div align="center">
+		<strong>tags:</strong> <a href="../../index.html">Oracle Linux</a> || 
+		<a href="../../sitemap.php.html">Oracle DataBase</a> ||
+		<a href="../../sitemap.php.html">Oracle Weblogic</a> || 
+		<a href="http://plsql.ru/">SQL & PL/SQL</a> || 
+ 		<a href="http://javadev.ru/">Java</a> || 
+ 		<a href="http://oracle-adf.ru/">Oracle ADF</a>
+	</div>
+
+	
+	<div align="center">
+		Исходные коды сайта oracle-dba.ru на <a href="https://github.com/plsql/oracle-dba.ru">github</a>
+	</div>
+
+
+<!---------------->
+<!-- Page Info  -->
+
+<!-- Эта страница была загружена с сайта: -->
+<!-- http://prev.oracle-dba.ru/install/oracle_client_installation_on_linux/index.php -->
+
+<!----------------------->
+<!-- Google Analinics  -->
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-4894954-13']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+
+<!-- Google Analinics  -->
+<!----------------------->
+
+<!-- Дата обращения к странице -->
+<!-- 05/08/2015 -->
+
+<!--/ Page Info  -->
+<!---------------->
+
+
+
+
+
+</body>
+
+</html>

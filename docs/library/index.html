@@ -1,0 +1,627 @@
+﻿<html>
+
+
+
+<head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta name="keywords" content="Oracle DBA, RAC, ASM, DataGuard"/>
+	<meta name="description" content="Администрирование и разработка баз данных Oracle"/>
+
+		<title>Oracle DBA</title>
+
+		 <link rel="stylesheet" href="http://prev.oracle-dba.ru/docs/library/hb.css" type="text/css">
+		 <link rel="stylesheet" href="http://prev.oracle-dba.ru/docs/library/html.css" type="text/css">
+
+
+
+                  <link rel="stylesheet" href="../../css/bootstrap.css">
+                  <link rel="stylesheet" href="../../css/app.css">
+
+
+
+				<style type="text/css">
+				   .text {
+
+					padding-left: 100px;
+					padding-right: 100px;
+
+				   }
+
+				   .link {
+
+					padding-left: 100px;
+					padding-right: 100px;
+
+				   }
+
+				</style>
+
+
+        <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'oracle-dba'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function () {
+            var s = document.createElement('script'); s.async = true;
+            s.type = 'text/javascript';
+            s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+        </script>
+
+
+
+<style type="text/css">
+ .spoiler_body {display:none; cursor:pointer;}
+</style>
+
+
+	</head>
+
+
+<body>
+
+
+
+
+<br/><br/>
+
+<div class="link">
+
+
+<table width="100%" border="0">
+<tr>
+<td align="left" width="40%">
+<a href="../../index.html"><img src="../../remote_oracle_dba.jpeg" border="0" alt="Oracle DBA"
+/></a>
+</td>
+
+
+<td align="center">
+<a href="../../chat.php.html">Заходи в WEBCHAT админов Oracle<br/>
+Здесь старый добрый IRC</a>
+</td>
+
+<td align="right" width="33%">
+<a href="../../job/remote_oracle_dba_on_project/index.html"><img src="../../remote-oracle-dba-services.jpg" border="0"
+alt="Remote Oracle DBA Services"
+height="" width="300px" /></a>
+</td>
+
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+
+
+<div id="cse" style="width: 100%;">Loading</div>
+<script src="http://www.google.ru/jsapi" type="text/javascript"></script>
+<script type="text/javascript">
+  google.load('search', '1', {language : 'ru', style : google.loader.themes.V2_DEFAULT});
+  google.setOnLoadCallback(function() {
+    var customSearchOptions = {};  var customSearchControl = new google.search.CustomSearchControl(
+      '006168197569183510807:fzridi5qcxw', customSearchOptions);
+    customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+    customSearchControl.draw('cse');
+  }, true);
+</script>
+
+
+<div align="center" style="color:red">
+Работа над этой версией сайта остановлена. Рекомендуется обратиться к новой версии сайта <a href="http://oracle-dba.ru">oracle-dba.ru</a> на котором в дальшейшем будут исправляться все ошибки и неточности.
+</div>
+
+<br/>
+
+<div align="center">
+<a href="../../sitemap.php.html">Карта сайта</a>
+</div>
+
+
+
+<br/><br/><br/>
+<h2>С чего начать изучение Oracle?</h2><br/>
+
+
+<br/><br/>
+<p>Если Вы только приступаете к изучению основ работы с базами данных Oracle, я бы рекомендовал следующее:</p>
+
+
+<br/><br/>
+<hr/>
+<br/><br/>
+
+<h3>Настольная книга Администратора БД Oracle</h3>
+
+<strong>
+Наконец-то найдена моя любимая книга по администрированию баз данных Oracle. 
+Это та книга, которая достаточно долго лежала у меня на столе, когда в моей компетенции было администрирование серверов. Часть материалов сайта взята как раз из нее.
+
+<br/><br/>
+
+Разумеется я говорю о книге Сема Алапати: Oracle DataBase 11g Руководство Администратора Баз Данных. Качество книги - отличное.
+</strong>
+
+
+<br/><br/>
+hxxp://rutracker.org/forum/viewtopic.php?t=4786605
+
+<br/><br/>
+<hr/>
+<br/><br/>
+
+<h3>Видеокурсы от "Специалист":</h3>
+
+
+Вы можете постараться найти курсы от обучающего центра специалист. <br/>
+
+В свободном доступе можно найти почти все.
+
+<br/><br/>
+
+Видел здесь:
+
+<br/><br/>
+hxxp://ccc.hn/topic/11024-%D1%81%D0%BF%D0%B5%D1%86%D0%B8%D0%B0%D0%BB%D0%B8%D1%81%D1%82-%C2%AB%D0%B0%D0%B4%D0%BC%D0%B8%D0%BD%D0%B8%D1%81%D1%82%D1%80%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-oracle11g%C2%BB-%D0%BA%D0%BE%D0%BC%D0%BF%D0%BB%D0%B5%D0%BA%D1%81%D0%BD%D0%B0/
+<br/><br/>
+hxxp://ccc.hn/topic/11026-%D1%81%D0%BF%D0%B5%D1%86%D0%B8%D0%B0%D0%BB%D0%B8%D1%81%D1%82-oracle-11g-%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4-sql/
+
+<br/><br/>
+hxxp://ccc.hn/topic/11027-%D1%81%D0%BF%D0%B5%D1%86%D0%B8%D0%B0%D0%BB%D0%B8%D1%81%D1%82-oracle-11g-%D0%BF%D0%B5%D1%80%D0%B5%D0%B4%D0%BE%D0%B2%D1%8B%D0%B5-%D0%BC%D0%B5%D1%82%D0%BE%D0%B4%D1%8B-plsql/
+
+
+<br/><br/>
+<hr/>
+<br/><br/>
+
+
+<h3>Можно также посмотреть курсы Игоря Мирончика:</h3>
+
+<br/><br/>
+
+<ul>
+<li><a href="http://www.youtube.com/view_play_list?p=D0A648F8F65684BF"><strong>Основы администрирования БД Oracle</strong></a></li>
+<li><a href="http://www.youtube.com/view_play_list?p=6F78CB4058D30626"><strong>Администрирование Oracle 10g, 11g</strong></a></li>
+</ul>
+
+
+<br/><br/><br/>
+<h3>Видеоматериалы на английском от [cbtnuggets.com]:</h3><br/>
+
+
+<ul>
+	<li><a href="http://rutracker.org/forum/viewtopic.php?t=3834836"><strong>Oracle Database 11g SQL Fundamentals 1 (1Z0-051)</strong></a></li>
+	<li><a href="http://rutracker.org/forum/viewtopic.php?t=3872547"><strong> Oracle Database 11g: Administration I (1Z0-052)</strong></a></li>
+	<li><a href="http://rutracker.org/forum/viewtopic.php?t=4212455"><strong> Oracle Database 11g: Administration 2 (1Z0-053)</strong></a></li>
+
+</ul>
+
+
+
+<br/><br/><br/>
+<h3>Книги полезные для администратора баз данных Oracle (на русском языке):</h3><br/>
+
+
+<ul>
+	<li><a href="http://rutracker.org/forum/viewtopic.php?t=1286064"><strong>Oracle 10g администрирование часть 1 (rus)</strong></a></li>
+	<li><a href="http://rutracker.org/forum/viewtopic.php?t=2575109"><strong>Oracle 10g администрирование часть 2 (rus)</strong></a></li>
+
+</ul>
+
+
+
+
+<br/><br/><br/>
+<h3>Книги полезные для администратора баз данных Oracle (на английском языке):</h3><br/>
+
+
+<ul>
+	<li><a href="http://rutracker.org/forum/viewtopic.php?t=3081992"><strong>Expert Oracle Database 11g Administration</strong></a></li>
+	<li><a href="http://rutracker.org/forum/viewtopic.php?t=3083606"><strong>Expert's Voice in Oracle - Kyte T. - Expert Oracle Database Architecture, Second Edition [2010, PDF, ENG]</strong></a></li>
+	<li><a href="http://rutracker.org/forum/viewtopic.php?t=3890465"><strong>Expert's Voice in Oracle - Alapati S., Kuhn D., Padfield B. - Oracle Database 11g Performance Tuning Recipes. A Problem-Solution Approach [2011, PDF, ENG]</strong></a></li>
+
+
+</ul>
+
+
+
+<br/><br/><br/>
+См. Также: <br/><br/>
+
+<ul>
+	<li><a href="http://rutracker.org/forum/viewtopic.php?t=3487264"><strong>Linux System Architecture [2011, ENG]</strong></a></li>
+	<li><a href="http://rutracker.org/forum/viewtopic.php?t=3555861"><strong>Eterprise Linux 6 Edition [2011, ENG]</strong></a></li>
+	<li><a href="http://rutracker.org/forum/viewtopic.php?t=253153"><strong>Видеокурс по основам работы с Solaris 10 (eng)</strong></a> (стоит изучать, если предполагается работать с серверами работающими на данной платформе)<br/></li>
+</ul>
+
+
+<br/>
+<br/>
+<br/>
+
+
+<h3>Классика Oracle:</h3>
+<br/><br/>
+
+<ul>
+<li><a href="http://rutracker.org/forum/viewtopic.php?t=937697">Oracle. Проектирование баз данных</a> (RUS 1999)</li>
+<li><a href="http://rutracker.org/forum/viewtopic.php?t=1907447">Том Кайт - Oracle для профессионалов</a>(RUS 2003)</li>
+
+</ul>
+
+
+<br/>
+<br/>
+<hr/>
+<br/>
+<br/>
+
+
+
+<h3>[VTC] Intermediate Oracle 11g [2013, ENG]</h3>
+
+This Intermediate VTC course expands on the Introduction to Oracle 11g course. It gives you a more detailed grass roots knowledge of Oracle SQL and Oracle PL/SQL. Author and expert Gavin Powell covers a wide range of topics including many types of queries, expressions, and statements. He also explores sequences, synonyms, views, materialized views, user access and security, working with indexes, and the basics of programming with PL/SQL. As with the introductory course, this intermediate course is not focused on Oracle Certification but will give you a good start towards some more advanced aspects of coding SQL and PL/SQL. To begin learning today, simply click on the movie links.
+
+<br/>
+
+
+<script type="text/javascript"
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js">
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+ $('.spoiler_links').click(function(){
+  $(this).parent().children('div.spoiler_body').toggle('normal');
+  return false;
+ });
+});
+</script>
+
+<br/><br/>
+
+<div>
+ <a href="index.html" class="spoiler_links">Содержимое курса</a>
+<br/><br/>
+
+
+ <div class="spoiler_body">
+
+<pre>
+Introduction
+Welcome to Intermediate Oracle 01:13
+Prerequisites for This Course 02:34
+About This Course 02:55
+Subqueries
+What is a Subquery? 04:29
+Subquery Syntax 05:21
+Types of Subqueries 06:22
+Where Can Subqueries Be Used? 05:40
+Comparison Conditions pt. 1 03:54
+Comparison Conditions pt. 2 05:40
+Regular vs. Correlated Subqueries 05:19
+Using the WITH Clause 05:45
+Nested Semi Joins 06:45
+Specialized Queries
+Composite Query Syntax 04:18
+Using Composite Queries pt. 1 06:02
+Using Composite Queries pt. 2 02:26
+Hierarchical Queries 03:41
+Hierarchical Query Syntax 03:48
+Hierarchical Family Trees pt. 1 06:09
+Hierarchical Family Trees pt. 2 06:21
+Flashback Query Syntax 02:54
+Flashback Query Pseudocolumns 02:02
+Using Flashback Queries pt. 1 04:47
+Using Flashback Queries pt. 2 03:01
+Expressions and Regular Expressions
+What an Expression Is 06:07
+Types of Expressions 01:42
+Expression Types Demo pt. 1 05:45
+Expression Types Demo pt. 2 04:37
+Expression Types Demo pt. 3 06:46
+Meta Characters 06:30
+Regular Expression Functions 05:01
+Using Regular Expression Patterns 06:41
+Check Constraint Regular Expressions 03:00
+Oracle Expression Filter 02:47
+Changing Tables
+The ALTER TABLE Command 02:30
+Table Properties pt. 1 06:52
+Table Properties pt. 2 06:22
+Columns pt. 1 04:00
+Columns pt. 2 05:31
+Columns pt. 3 05:07
+Columns pt. 4 03:56
+Constraints Options 02:39
+Constraint States 06:44
+Renaming and Dropping Constraints 04:48
+Changing Data
+What the DML Commands Are 03:04
+INSERT Statement Syntax 05:37
+Using INSERT pt. 1 03:38
+Using INSERT pt. 2 04:46
+Using INSERT pt. 3 05:58
+UPDATE Statement Syntax 02:01
+Using UPDATE 04:56
+DELETE and TRUNCATE Syntax 06:05
+Using DELETE and TRUNCATE 06:29
+MERGE Statement Syntax 03:46
+Using MERGE 05:59
+Transactional Control 06:26
+Demonstrating Transaction Control 05:29
+Users and Security
+Oracle Security pt. 1 06:02
+Oracle Security pt. 2 05:06
+Types of Users 06:10
+Create User Syntax pt. 1 05:46
+Create User Syntax pt. 2 04:13
+Using CREATE USER pt. 1 04:16
+Using CREATE USER pt. 2 03:50
+Alter and Drop User Syntax 04:26
+Using ALTER and DROP USER 05:56
+Oracle Power Users 06:59
+Resources and Profiles 01:41
+Privileges pt. 1 06:02
+Privileges pt. 2 05:41
+Granting and Revoking Privileges 05:57
+Using GRANT pt. 1 04:00
+Using GRANT pt. 2 03:07
+Using REVOKE 05:16
+Group Privileges Using Roles 03:08
+Setting Roles 01:41
+Metadata Views pt. 1 04:49
+Metadata Views pt. 2 03:26
+Specialized Database Objects
+Sequence Syntax 05:08
+What and Where and How of Sequences 03:30
+Using Sequences 06:25
+Synonym Syntax 04:31
+Using Synonyms 06:16
+Database Links 05:39
+Views and Materialized Views 06:46
+Using Views 04:23
+Metadata Views pt. 1 05:00
+Metadata Views pt. 2 06:02
+Working with Indexes
+Types of Indexes 04:24
+Index Attributes 06:09
+BTree Indexes 05:51
+Function-Based Indexes 04:49
+Bitmap Indexes 05:45
+Exotic Indexing 04:37
+Creating Indexes pt. 1 05:55
+Creating Indexes pt. 2 03:08
+Changing and Dropping Indexes 06:53
+Working with Indexes pt. 1 06:49
+Working with Indexes pt. 2 06:05
+Metadata Views 06:20
+PL/SQL
+What PL/SQL Is pt. 1 03:47
+What PL/SQL Is pt. 2 06:02
+Why PL/SQL Is Programming 06:36
+Blocks & Exception Traps pt. 1 05:22
+Blocks & Exception Traps pt. 2 04:06
+Named Procedures pt. 1 03:52
+Named Procedures pt. 2 07:09
+Functions 06:02
+Triggers pt. 1 04:48
+Triggers pt. 2 05:25
+Triggers pt. 3 04:51
+Packages 06:08
+Variables and Datatypes pt. 1 06:26
+Variables and Datatypes pt. 2 02:47
+Programming Control Structures 04:56
+Simple PL/SQL Database Access 05:41
+Explicit Cursors 06:26
+Implicit Cursors pt. 1 05:18
+Implicit Cursors pt. 2 06:53
+Dynamic SQL pt. 1 06:35
+Dynamic SQL pt. 2 05:18
+Wrapping Up PL/SQL 04:11
+Conclusion
+Course Wrap Up 04:51
+About the Author 01:19
+</pre>
+
+ </div>
+</div>
+
+hxxp://rutracker.org/forum/viewtopic.php?t=4510732
+
+<br/><br/>
+
+<a href="http://oracle-dba.ru/database/example/shemas/">Вроде вот эта схема используется в тестовых примерах</a><br/>
+
+
+<br/><br/>
+<hr/>
+<br/><br/>
+
+
+Книги, рекомендованные моими коллегами, разработчиками Oracle:
+
+
+<br/>
+<br/>
+
+<strong>Cost-Based Oracle Foundaments/Oracle основы стоимостной оптимизации</strong><br/>
+hxxp://rutracker.org/forum/viewtopic.php?t=3222256
+
+
+<br/><br/>
+<hr/>
+<br/><br/>
+
+
+	<div style="padding:10px; border:thin solid black;" align="center">
+
+	  <h3><a href="http://plsql.ru/content/plsql_books_and_videos/">Ссылки на материалы по изучению Oracle SQL и PL/SQL теперь собираются здесь</a></h3>
+
+	</div>
+
+
+<br/><br/>
+<hr/>
+<br/><br/>
+
+
+
+<div style="padding:10px; border:thin solid black;">
+
+	<h3></h3>
+
+~Вопрос (человек работает в компании, где используются сервера баз данных Oracle):<br/><br/>
+
+Ну прошел я комплекс курсов «Администрирование Oracle Database 11g» в Специалисте.. а что дальше? За БД браться еще бояздно.<br/><br/>
+
+~Ответ:<br/><br/>
+
+Нужна практика.
+
+<br/><br/>
+
+Если есть возможность, попробуйте выделить какой-нибудь компьютер и разверните на нем базу из каких-нибудь бекапов Oracle. Или
+клонируйте уже работающую. Может кто из ДБА поможет.
+(если это возможно конечно, я когда работал у меня такая
+возможность была.). 
+
+<br/><br/>
+
+Можно использовать и какую-нибудь из стандартных
+схем, но лучше на приблеженным к реальным данным, с которыми
+предстоит работать.
+
+<br/><br/>
+
+Ну а дальше следует проделать все шаги из курса Администрирование 2 по
+восстановленю базы, т.е. восстановление при потере контрол файла, при
+потере редолог журнала, импорт / экспорт, бекапы с помощью RMAN,
+откат к определенной дате, Upgrade до следующей версии.
+
+</div>
+
+<br/><br/>
+<hr/>
+<br/><br/>
+
+
+<div style="padding:10px; border:thin solid black;">
+
+	<h3>Порекомендуйте хорошие материалы по изучению технологий Oracle.</h3>
+
+	Базы данных, сервера приложений, BI, Java, etc
+
+	<br/><br/>
+	Если есть записи каких-нибудь тренингов (не для начинающих по базам), напишите.
+	Может быть мы обменяемся с Вами, тем что есть у Нас. Я бы посмотрел по DataWarehousing, проектированию.
+
+	<br/><img src="http://marley.org/a3333333mail.gif" alt="Marley" border="0" />
+
+	<br/>
+
+</div>
+
+
+<br/><br/>
+<hr>
+<br/><br/>
+
+
+
+          <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = 'oracle-dba'; // required: replace example with your forum shortname
+
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+
+<br/><br/>
+<br/><br/>
+
+
+</div>
+<br/>
+
+</div>
+
+
+
+
+
+
+
+<br/><br/>
+<hr>
+<br/>
+
+<div align="center">
+	<a href="../../index.html"><h3>Oracle DBA</h3></a>
+</div>
+
+	<div align="center">
+		<strong>tags:</strong> <a href="../../index.html">Oracle Linux</a> || 
+		<a href="../../sitemap.php.html">Oracle DataBase</a> ||
+		<a href="../../sitemap.php.html">Oracle Weblogic</a> || 
+		<a href="http://plsql.ru/">SQL & PL/SQL</a> || 
+ 		<a href="http://javadev.ru/">Java</a> || 
+ 		<a href="http://oracle-adf.ru/">Oracle ADF</a>
+	</div>
+
+	
+	<div align="center">
+		Исходные коды сайта oracle-dba.ru на <a href="https://github.com/plsql/oracle-dba.ru">github</a>
+	</div>
+
+
+<!---------------->
+<!-- Page Info  -->
+
+<!-- Эта страница была загружена с сайта: -->
+<!-- http://prev.oracle-dba.ru/docs/library/index.php -->
+
+<!----------------------->
+<!-- Google Analinics  -->
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-4894954-13']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+
+<!-- Google Analinics  -->
+<!----------------------->
+
+<!-- Дата обращения к странице -->
+<!-- 05/08/2015 -->
+
+<!--/ Page Info  -->
+<!---------------->
+
+
+
+
+
+</body>
+
+</html>

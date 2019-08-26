@@ -1,0 +1,297 @@
+﻿<html>
+
+
+
+<head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta name="keywords" content="Oracle DBA, RAC, ASM, DataGuard"/>
+	<meta name="description" content="Администрирование и разработка баз данных Oracle"/>
+
+		<title>Oracle DBA</title>
+
+		 <link rel="stylesheet" href="http://prev.oracle-dba.ru/hb.css" type="text/css">
+		 <link rel="stylesheet" href="http://prev.oracle-dba.ru/html.css" type="text/css">
+
+
+
+                  <link rel="stylesheet" href="css/bootstrap.css">
+                  <link rel="stylesheet" href="css/app.css">
+
+
+
+				<style type="text/css">
+				   .text {
+
+					padding-left: 100px;
+					padding-right: 100px;
+
+				   }
+
+				   .link {
+
+					padding-left: 100px;
+					padding-right: 100px;
+
+				   }
+
+				</style>
+
+
+        <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'oracle-dba'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function () {
+            var s = document.createElement('script'); s.async = true;
+            s.type = 'text/javascript';
+            s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+        </script>
+
+
+
+<style type="text/css">
+ .spoiler_body {display:none; cursor:pointer;}
+</style>
+
+
+	</head>
+
+
+<body>
+
+
+
+
+<br/><br/>
+
+<div class="link">
+
+
+<table width="100%" border="0">
+<tr>
+<td align="left" width="40%">
+<a href="index.html"><img src="remote_oracle_dba.jpeg" border="0" alt="Oracle DBA"
+/></a>
+</td>
+
+
+<td align="center">
+<a href="chat.php.html">Заходи в WEBCHAT админов Oracle<br/>
+Здесь старый добрый IRC</a>
+</td>
+
+<td align="right" width="33%">
+<a href="job/remote_oracle_dba_on_project/index.html"><img src="remote-oracle-dba-services.jpg" border="0"
+alt="Remote Oracle DBA Services"
+height="" width="300px" /></a>
+</td>
+
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+
+
+<div id="cse" style="width: 100%;">Loading</div>
+<script src="http://www.google.ru/jsapi" type="text/javascript"></script>
+<script type="text/javascript">
+  google.load('search', '1', {language : 'ru', style : google.loader.themes.V2_DEFAULT});
+  google.setOnLoadCallback(function() {
+    var customSearchOptions = {};  var customSearchControl = new google.search.CustomSearchControl(
+      '006168197569183510807:fzridi5qcxw', customSearchOptions);
+    customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+    customSearchControl.draw('cse');
+  }, true);
+</script>
+
+
+<div align="center" style="color:red">
+Работа над этой версией сайта остановлена. Рекомендуется обратиться к новой версии сайта <a href="http://oracle-dba.ru">oracle-dba.ru</a> на котором в дальшейшем будут исправляться все ошибки и неточности.
+</div>
+
+<br/>
+
+<div align="center">
+<a href="sitemap.php.html">Карта сайта</a>
+</div>
+
+<br/>
+<br/><br/>
+
+
+
+
+
+
+<br/><br/>
+<h3>Yandex:</h3>
+
+<br/>
+<br/><br/>
+Вопрос 1:
+
+<br/><br/>
+
+
+На сервере СУБД на диске заканчивается место (используется Linux). Вы выяснили, что процесс lns1 начал по какой-то причине очень активно писать в файл <diagnostic_dest>/dbname/sid/trace/<sid>_lns1_<pid>.trc, из-за чего стало заканчиваться место на диске.
+<br/><br/>
+Каким образом средствами ОС освободить место на диске(процесс lns1 завершать (штатно или kill-ом ) нельзя)?
+
+
+
+<br/>
+<br/><br/>
+Вопрос 2:
+<br/><br/>
+Могут ли две функции (stored functions) одного пользователя Oracle иметь одинаковые имена?
+
+
+<br/>
+<br/><br/>
+Вопрос 3:
+<br/><br/>
+	
+
+Тезисно опишите отличия взаимодействия СУБД Оракл (версии 10.2 и старше) с ОС Linux в случае использования AMM (Automatic Memory, начиная с версии 11.1) и ASMM (Automatic Shared Memory Management), СУБД Оракл и ОС Linux 64битные.
+
+
+<br/>
+<br/><br/>
+Вопрос 4:
+<br/><br/>
+	
+
+Есть БД Оракл размером 7 ТБ, в которой в том числе хранятся данные в 10 партиционированных таблицах (range partitions, 1 партиция — одни сутки) за 3 года. Вам необходимо поднять частичную копию этой БД, в которой присутствовали бы данные только за последний месяц. На сервере, где необходимо поднять БД-копию, места для полного восстановления исходной БД недостаточно.
+<br/><br/>
+Каким образом вы будете решать эту задачу?
+
+
+
+<br/>
+<br/><br/>
+Вопрос 5:
+<br/><br/>
+Чем отличаются в плане выполнения запроса операции hash join от nested loops. какая выполняется быстрее, при каких условиях?
+
+
+<br/>
+<br/><br/>
+Вопрос 6:
+<br/><br/>
+
+
+Дана PL/SQL-коллекция, объявленная следующим образом:
+
+<br/><br/>
+
+<pre>
+
+declare
+   type TNumList is varray(10) of number;
+   lstN TNumList;
+...
+
+
+
+ Перечислите, какие из 5-ти логических выражений истинны независимо от содержимого переменной lstN:
+
+ lstN.Limit is not NULL
+
+ lstN.First = 1 or lstN.First is NULL
+
+ lstN.Trim is NULL
+
+ Nvl(lstN.Last,0) = lstN.Count
+
+ lstN.Prior(lstN.First) is NULL
+
+</pre>
+
+
+<br/>
+<br/><br/>
+Вопрос 7:
+<br/><br/>
+	
+Каким образом в 4-х узловом Real Application Cluster сделать так, чтобы задача, запускаемая с использованием dbms_scheduler в случае доступности всех узлов исполнялась только на 1 узле, в случае недоступности 1-го узла - на любом работоспособном.
+
+
+
+</div>		
+		
+	
+
+
+
+
+
+<br/><br/>
+<hr>
+<br/>
+
+<div align="center">
+	<a href="index.html"><h3>Oracle DBA</h3></a>
+</div>
+
+	<div align="center">
+		<strong>tags:</strong> <a href="index.html">Oracle Linux</a> || 
+		<a href="sitemap.php.html">Oracle DataBase</a> ||
+		<a href="sitemap.php.html">Oracle Weblogic</a> || 
+		<a href="http://plsql.ru/">SQL & PL/SQL</a> || 
+ 		<a href="http://javadev.ru/">Java</a> || 
+ 		<a href="http://oracle-adf.ru/">Oracle ADF</a>
+	</div>
+
+	
+	<div align="center">
+		Исходные коды сайта oracle-dba.ru на <a href="https://github.com/plsql/oracle-dba.ru">github</a>
+	</div>
+
+
+<!---------------->
+<!-- Page Info  -->
+
+<!-- Эта страница была загружена с сайта: -->
+<!-- http://prev.oracle-dba.ru/oracle-dba-questions-on-interview.php -->
+
+<!----------------------->
+<!-- Google Analinics  -->
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-4894954-13']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+
+<!-- Google Analinics  -->
+<!----------------------->
+
+<!-- Дата обращения к странице -->
+<!-- 05/08/2015 -->
+
+<!--/ Page Info  -->
+<!---------------->
+
+
+
+
+
+</body>
+
+</html>

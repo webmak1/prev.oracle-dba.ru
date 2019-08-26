@@ -1,0 +1,446 @@
+﻿<html>
+
+
+
+<head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta name="keywords" content="Oracle DBA, RAC, ASM, DataGuard"/>
+	<meta name="description" content="Администрирование и разработка баз данных Oracle"/>
+
+		<title>Oracle DBA</title>
+
+		 <link rel="stylesheet" href="http://prev.oracle-dba.ru/database/linux/5.8/oracle/11.2/rac/install/hb.css" type="text/css">
+		 <link rel="stylesheet" href="http://prev.oracle-dba.ru/database/linux/5.8/oracle/11.2/rac/install/html.css" type="text/css">
+
+
+
+                  <link rel="stylesheet" href="../../../../../../../css/bootstrap.css">
+                  <link rel="stylesheet" href="../../../../../../../css/app.css">
+
+
+
+				<style type="text/css">
+				   .text {
+
+					padding-left: 100px;
+					padding-right: 100px;
+
+				   }
+
+				   .link {
+
+					padding-left: 100px;
+					padding-right: 100px;
+
+				   }
+
+				</style>
+
+
+        <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'oracle-dba'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function () {
+            var s = document.createElement('script'); s.async = true;
+            s.type = 'text/javascript';
+            s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+        </script>
+
+
+
+<style type="text/css">
+ .spoiler_body {display:none; cursor:pointer;}
+</style>
+
+
+	</head>
+
+
+<body>
+
+
+
+
+<br/><br/>
+
+<div class="link">
+<table width="100%" border="0">
+<tr>
+<td align="left" width="40%">
+<a href="../../../../../../../index.html"><img src="../../../../../../../remote_oracle_dba.jpeg" border="0" alt="Oracle DBA"
+/></a>
+</td>
+
+
+<td align="center">
+<a href="../../../../../../../chat.php.html">Заходи в WEBCHAT админов Oracle<br/>
+Здесь старый добрый IRC</a>
+</td>
+
+<td align="right" width="33%">
+<a href="../../../../../../../job/remote_oracle_dba_on_project/index.html"><img src="../../../../../../../remote-oracle-dba-services.jpg" border="0"
+alt="Remote Oracle DBA Services"
+height="" width="300px" /></a>
+</td>
+
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+
+
+<div id="cse" style="width: 100%;">Loading</div>
+<script src="http://www.google.ru/jsapi" type="text/javascript"></script>
+<script type="text/javascript">
+  google.load('search', '1', {language : 'ru', style : google.loader.themes.V2_DEFAULT});
+  google.setOnLoadCallback(function() {
+    var customSearchOptions = {};  var customSearchControl = new google.search.CustomSearchControl(
+      '006168197569183510807:fzridi5qcxw', customSearchOptions);
+    customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+    customSearchControl.draw('cse');
+  }, true);
+</script>
+
+
+<div align="center" style="color:red">
+Работа над этой версией сайта остановлена. Рекомендуется обратиться к новой версии сайта <a href="http://oracle-dba.ru">oracle-dba.ru</a> на котором в дальшейшем будут исправляться все ошибки и неточности.
+</div>
+
+<br/>
+
+<div align="center">
+<a href="../../../../../../../sitemap.php.html">Карта сайта</a>
+</div>
+
+
+
+<br/><br/><br/>
+<h2><a href="index.php.html">[Инсталляция Oracle RAC 11.2 на Oracle Linux 5.8]</a>: Инсталляция Grid</h2>
+
+<pre>
+
+Инсталляция ПО Oracle (GRID)
+
+
+Войдите в систему пользователем, от имени которого будет будет происходить инсталляция базы данных.
+# su - oracle11
+
+Выполните команду
+$ id
+uid=500(oracle11) gid=1001(dba) groups=1000(oinstall),1001(dba)
+Убедитесь, что gid (dba)
+
+
+$ cd /tmp
+
+$ unzip p10404530_112030_Linux-x86-64_1of7.zip; unzip p10404530_112030_Linux-x86-64_2of7.zip; unzip p10404530_112030_Linux-x86-64_3of7.zip
+
+
+
+Удалите текущие переменные окружения ORACLE_BASE ORACLE_HOME. Они в настоящее время заданы неправильно.
+$ unset ORACLE_BASE ORACLE_HOME
+
+Определите системную переменную DISPLAY следующим образом.
+$ export DISPLAY=192.168.1.200:0.0
+
+
+В данном случае 192.168.1.200 - ip адрес компьютера, с которого происходит процесс управления установкой.
+На 192.168.1.200 инсталлирован и стартован Xming
+
+$ cd /tmp/grid/
+$ ./runInstaller
+
+</pre>
+
+<img src="http://img.oradba.net/img/oracle/database/rac/11.2/rac_grid_installation_01.PNG" border="0" alt="Oracle RAC installation"><br/><br/>
+<img src="http://img.oradba.net/img/oracle/database/rac/11.2/rac_grid_installation_02.PNG" border="0" alt="Oracle RAC installation"><br/><br/>
+<img src="http://img.oradba.net/img/oracle/database/rac/11.2/rac_grid_installation_03.PNG" border="0" alt="Oracle RAC installation"><br/><br/>
+<img src="http://img.oradba.net/img/oracle/database/rac/11.2/rac_grid_installation_04.PNG" border="0" alt="Oracle RAC installation"><br/><br/>
+<img src="http://img.oradba.net/img/oracle/database/rac/11.2/rac_grid_installation_05.PNG" border="0" alt="Oracle RAC installation"><br/><br/>
+<img src="http://img.oradba.net/img/oracle/database/rac/11.2/rac_grid_installation_06.PNG" border="0" alt="Oracle RAC installation"><br/><br/>
+<img src="http://img.oradba.net/img/oracle/database/rac/11.2/rac_grid_installation_07.PNG" border="0" alt="Oracle RAC installation"><br/><br/>
+<img src="http://img.oradba.net/img/oracle/database/rac/11.2/rac_grid_installation_08.PNG" border="0" alt="Oracle RAC installation"><br/><br/>
+<img src="http://img.oradba.net/img/oracle/database/rac/11.2/rac_grid_installation_09.PNG" border="0" alt="Oracle RAC installation"><br/><br/>
+<img src="http://img.oradba.net/img/oracle/database/rac/11.2/rac_grid_installation_10.PNG" border="0" alt="Oracle RAC installation"><br/><br/>
+<img src="http://img.oradba.net/img/oracle/database/rac/11.2/rac_grid_installation_11.PNG" border="0" alt="Oracle RAC installation"><br/><br/>
+<img src="http://img.oradba.net/img/oracle/database/rac/11.2/rac_grid_installation_12.PNG" border="0" alt="Oracle RAC installation"><br/><br/>
+<img src="http://img.oradba.net/img/oracle/database/rac/11.2/rac_grid_installation_13.PNG" border="0" alt="Oracle RAC installation"><br/><br/>
+<img src="http://img.oradba.net/img/oracle/database/rac/11.2/rac_grid_installation_14.PNG" border="0" alt="Oracle RAC installation"><br/><br/>
+<img src="http://img.oradba.net/img/oracle/database/rac/11.2/rac_grid_installation_15.PNG" border="0" alt="Oracle RAC installation"><br/><br/>
+<img src="http://img.oradba.net/img/oracle/database/rac/11.2/rac_grid_installation_16.PNG" border="0" alt="Oracle RAC installation"><br/><br/>
+<img src="http://img.oradba.net/img/oracle/database/rac/11.2/rac_grid_installation_17.PNG" border="0" alt="Oracle RAC installation"><br/><br/>
+<img src="http://img.oradba.net/img/oracle/database/rac/11.2/rac_grid_installation_18.PNG" border="0" alt="Oracle RAC installation"><br/><br/>
+<img src="http://img.oradba.net/img/oracle/database/rac/11.2/rac_grid_installation_19.PNG" border="0" alt="Oracle RAC installation"><br/><br/>
+<img src="http://img.oradba.net/img/oracle/database/rac/11.2/rac_grid_installation_20.PNG" border="0" alt="Oracle RAC installation"><br/><br/>
+<img src="http://img.oradba.net/img/oracle/database/rac/11.2/rac_grid_installation_21.PNG" border="0" alt="Oracle RAC installation"><br/><br/>
+<img src="http://img.oradba.net/img/oracle/database/rac/11.2/rac_grid_installation_22.PNG" border="0" alt="Oracle RAC installation"><br/><br/>
+<img src="http://img.oradba.net/img/oracle/database/rac/11.2/rac_grid_installation_23.PNG" border="0" alt="Oracle RAC installation"><br/><br/>
+<img src="http://img.oradba.net/img/oracle/database/rac/11.2/rac_grid_installation_24.PNG" border="0" alt="Oracle RAC installation"><br/><br/>
+
+
+<pre>
+
+
+node1
+
+
+# /u01/app/oraInventory/orainstRoot.sh
+Changing permissions of /u01/app/oraInventory.
+Adding read,write permissions for group.
+Removing read,write,execute permissions for world.
+
+Changing groupname of /u01/app/oraInventory to oinstall.
+The execution of the script is complete.
+
+
+
+
+# /u01/app/oraInventory/orainstRoot.sh
+Changing permissions of /u01/app/oraInventory.
+Adding read,write permissions for group.
+Removing read,write,execute permissions for world.
+
+Changing groupname of /u01/app/oraInventory to oinstall.
+The execution of the script is complete.
+[root@node1 ~]# /u01/app/grid/11.2/root.sh
+Performing root user operation for Oracle 11g
+
+The following environment variables are set as:
+    ORACLE_OWNER= oracle11
+    ORACLE_HOME=  /u01/app/grid/11.2
+
+Enter the full pathname of the local bin directory: [/usr/local/bin]:
+   Copying dbhome to /usr/local/bin ...
+   Copying oraenv to /usr/local/bin ...
+   Copying coraenv to /usr/local/bin ...
+
+
+Creating /etc/oratab file...
+Entries will be added to the /etc/oratab file as needed by
+Database Configuration Assistant when a database is created
+Finished running generic part of root script.
+Now product-specific root actions will be performed.
+Using configuration parameter file: /u01/app/grid/11.2/crs/install/crsconfig_params
+Creating trace directory
+User ignored Prerequisites during installation
+OLR initialization - successful
+  root wallet
+  root wallet cert
+  root cert export
+  peer wallet
+  profile reader wallet
+  pa wallet
+  peer wallet keys
+  pa wallet keys
+  peer cert request
+  pa cert request
+  peer cert
+  pa cert
+  peer root cert TP
+  profile reader root cert TP
+  pa root cert TP
+  peer pa cert TP
+  pa peer cert TP
+  profile reader pa cert TP
+  profile reader peer cert TP
+  peer user cert
+  pa user cert
+Adding Clusterware entries to inittab
+CRS-2672: Attempting to start 'ora.mdnsd' on 'node1'
+CRS-2676: Start of 'ora.mdnsd' on 'node1' succeeded
+CRS-2672: Attempting to start 'ora.gpnpd' on 'node1'
+CRS-2676: Start of 'ora.gpnpd' on 'node1' succeeded
+CRS-2672: Attempting to start 'ora.cssdmonitor' on 'node1'
+CRS-2672: Attempting to start 'ora.gipcd' on 'node1'
+CRS-2676: Start of 'ora.cssdmonitor' on 'node1' succeeded
+CRS-2676: Start of 'ora.gipcd' on 'node1' succeeded
+CRS-2672: Attempting to start 'ora.cssd' on 'node1'
+CRS-2672: Attempting to start 'ora.diskmon' on 'node1'
+CRS-2676: Start of 'ora.diskmon' on 'node1' succeeded
+CRS-2676: Start of 'ora.cssd' on 'node1' succeeded
+
+ASM created and started successfully.
+
+Disk Group DATA created successfully.
+
+clscfg: -install mode specified
+Successfully accumulated necessary OCR keys.
+Creating OCR keys for user 'root', privgrp 'root'..
+Operation successful.
+CRS-4256: Updating the profile
+Successful addition of voting disk 022a7b578f614f2ebf0a380dc50f7b40.
+Successful addition of voting disk 4cf55b0a2cf14fa1bf182111f8c4794c.
+Successful addition of voting disk 258a94b2d4144f98bf7a4db2084c7d95.
+Successfully replaced voting disk group with +DATA.
+CRS-4256: Updating the profile
+CRS-4266: Voting file(s) successfully replaced
+##  STATE    File Universal Id                File Name Disk group
+--  -----    -----------------                --------- ---------
+ 1. ONLINE   022a7b578f614f2ebf0a380dc50f7b40 (ORCL:VOL1) [DATA]
+ 2. ONLINE   4cf55b0a2cf14fa1bf182111f8c4794c (ORCL:VOL2) [DATA]
+ 3. ONLINE   258a94b2d4144f98bf7a4db2084c7d95 (ORCL:VOL3) [DATA]
+Located 3 voting disk(s).
+CRS-2672: Attempting to start 'ora.asm' on 'node1'
+CRS-2676: Start of 'ora.asm' on 'node1' succeeded
+CRS-2672: Attempting to start 'ora.DATA.dg' on 'node1'
+CRS-2676: Start of 'ora.DATA.dg' on 'node1' succeeded
+CRS-2672: Attempting to start 'ora.registry.acfs' on 'node1'
+CRS-2676: Start of 'ora.registry.acfs' on 'node1' succeeded
+Configure Oracle Grid Infrastructure for a Cluster ... succeeded
+
+
+node2
+
+# /u01/app/oraInventory/orainstRoot.sh
+Changing permissions of /u01/app/oraInventory.
+Adding read,write permissions for group.
+Removing read,write,execute permissions for world.
+
+Changing groupname of /u01/app/oraInventory to oinstall.
+The execution of the script is complete.
+
+
+# /u01/app/oraInventory/orainstRoot.sh
+Changing permissions of /u01/app/oraInventory.
+Adding read,write permissions for group.
+Removing read,write,execute permissions for world.
+
+Changing groupname of /u01/app/oraInventory to oinstall.
+The execution of the script is complete.
+You have new mail in /var/spool/mail/root
+[root@node2 ~]# /u01/app/grid/11.2/root.sh
+Performing root user operation for Oracle 11g
+
+The following environment variables are set as:
+    ORACLE_OWNER= oracle11
+    ORACLE_HOME=  /u01/app/grid/11.2
+
+Enter the full pathname of the local bin directory: [/usr/local/bin]:
+   Copying dbhome to /usr/local/bin ...
+   Copying oraenv to /usr/local/bin ...
+   Copying coraenv to /usr/local/bin ...
+
+
+Creating /etc/oratab file...
+Entries will be added to the /etc/oratab file as needed by
+Database Configuration Assistant when a database is created
+Finished running generic part of root script.
+Now product-specific root actions will be performed.
+Using configuration parameter file: /u01/app/grid/11.2/crs/install/crsconfig_params
+Creating trace directory
+User ignored Prerequisites during installation
+OLR initialization - successful
+Adding Clusterware entries to inittab
+CRS-4402: The CSS daemon was started in exclusive mode but found an active CSS daemon on node node1, number 1, and is terminating
+An active cluster was found during exclusive startup, restarting to join the cluster
+Configure Oracle Grid Infrastructure for a Cluster ... succeeded
+
+
+</pre>
+
+
+
+<br/><br/>
+<hr/>
+<br/><br/>
+
+
+
+          <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = 'oracle-dba'; // required: replace example with your forum shortname
+
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+
+
+
+<br/><br/>
+<br/><br/>
+
+
+</div>
+
+
+
+
+
+
+
+<br/><br/>
+<hr>
+<br/>
+
+<div align="center">
+	<a href="../../../../../../../index.html"><h3>Oracle DBA</h3></a>
+</div>
+
+	<div align="center">
+		<strong>tags:</strong> <a href="../../../../../../../index.html">Oracle Linux</a> || 
+		<a href="../../../../../../../sitemap.php.html">Oracle DataBase</a> ||
+		<a href="../../../../../../../sitemap.php.html">Oracle Weblogic</a> || 
+		<a href="http://plsql.ru/">SQL & PL/SQL</a> || 
+ 		<a href="http://javadev.ru/">Java</a> || 
+ 		<a href="http://oracle-adf.ru/">Oracle ADF</a>
+	</div>
+
+	
+	<div align="center">
+		Исходные коды сайта oracle-dba.ru на <a href="https://github.com/plsql/oracle-dba.ru">github</a>
+	</div>
+
+
+<!---------------->
+<!-- Page Info  -->
+
+<!-- Эта страница была загружена с сайта: -->
+<!-- http://prev.oracle-dba.ru/database/linux/5.8/oracle/11.2/rac/install/oracle_rac_grid_installation.php -->
+
+<!----------------------->
+<!-- Google Analinics  -->
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-4894954-13']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+
+<!-- Google Analinics  -->
+<!----------------------->
+
+<!-- Дата обращения к странице -->
+<!-- 05/08/2015 -->
+
+<!--/ Page Info  -->
+<!---------------->
+
+
+
+
+
+</body>
+
+</html>

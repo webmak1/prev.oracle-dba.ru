@@ -1,0 +1,518 @@
+﻿<html>
+
+
+
+<head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta name="keywords" content="Oracle DBA, RAC, ASM, DataGuard"/>
+	<meta name="description" content="Администрирование и разработка баз данных Oracle"/>
+
+		<title>Oracle DBA</title>
+
+		 <link rel="stylesheet" href="http://prev.oracle-dba.ru/hb.css" type="text/css">
+		 <link rel="stylesheet" href="http://prev.oracle-dba.ru/html.css" type="text/css">
+
+
+
+                  <link rel="stylesheet" href="css/bootstrap.css">
+                  <link rel="stylesheet" href="css/app.css">
+
+
+
+				<style type="text/css">
+				   .text {
+
+					padding-left: 100px;
+					padding-right: 100px;
+
+				   }
+
+				   .link {
+
+					padding-left: 100px;
+					padding-right: 100px;
+
+				   }
+
+				</style>
+
+
+        <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'oracle-dba'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function () {
+            var s = document.createElement('script'); s.async = true;
+            s.type = 'text/javascript';
+            s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+        </script>
+
+
+
+<style type="text/css">
+ .spoiler_body {display:none; cursor:pointer;}
+</style>
+
+
+	</head>
+
+
+<body>
+
+
+
+
+<br/><br/>
+
+<div class="link">
+	<div align="left">
+
+
+<a href="index.html"><img src="remote_oracle_dba.jpeg" border="0" alt="Remote Oracle DataBase Administrator"></a><br/></div>
+
+
+
+
+<br/>
+<br/><br/>
+
+
+<h3>Подготовка окружения (виртуальной машины VirtualBox) для инсталляции базы данных Oracle в Windows</h3><br/>
+
+
+Задаем переменную с именем создаваемой виртуальной машины, чтобы в дальнейшем лишний раз не подставлять данное значение в команды.
+
+       <div class="linuxCommand">
+	# su - vmadm<br/>
+$ vm=vm_win2k8_oradb12.1<br/>
+$ echo $vm<br/>
+
+       </div>
+
+
+
+  <br/><br/>
+
+Создаем каталоги для виртуальной машины и для snapshots
+
+       <div class="linuxCommand">
+	$ mkdir -p ${vm_home}/${vm}/snapshots
+       </div>
+
+
+  <br/><br/>
+
+Создание и регистрация виртуальной машины:
+
+  <br/><br/>
+
+
+Узнать список поддерживаемых операционных систем
+  <br/><br/>
+
+
+       <div class="linuxCommand">
+	$ VBoxManage list ostypes
+       </div>
+
+<br/><br/>
+Для виртуальной машины Windows 2k8
+<br/><br/>
+       <div class="linuxCommand">
+	$ VBoxManage createvm \<br/>
+--name ${vm} \<br/>
+--ostype Windows2008_64  \<br/>
+--basefolder ${vm_home}/${vm} \<br/>
+--register<br/>
+       </div>
+
+
+<br/><br/>
+Выбираю материнскую плату с более современным чипсетом . По умолчанию piix3
+
+
+       <div class="linuxCommand">
+	$ VBoxManage modifyvm ${vm}  --chipset piix3
+       </div>
+
+
+<br/><br/>
+Устанавливаю процессоры.
+
+
+       <div class="linuxCommand">
+	$ VBoxManage modifyvm ${vm}  --cpus 2
+       </div>
+
+
+<br/><br/>
+Устанавливаем планку оперативной памяти
+
+
+       <div class="linuxCommand">
+	$ VBoxManage modifyvm ${vm} --memory 4096
+       </div>
+
+<br/><br/>
+Подключаем видеокарту на 32 MB
+
+
+       <div class="linuxCommand">
+	$ VBoxManage modifyvm ${vm} --vram 32
+       </div>
+
+
+<br/><br/>
+Снимаем sound карту, вытаскиваем дисковвод
+
+
+       <div class="linuxCommand">
+	$ VBoxManage modifyvm ${vm} --floppy disabled --audio none
+       </div>
+
+
+<br/><br/>
+Подключаю контроллер жестких дисков (SATA). (С подключенным контроллером SAS, Windows не видит жесткие диски)
+
+
+       <div class="linuxCommand">
+	$ VBoxManage storagectl ${vm} \<br/>
+--add sata \<br/>
+--name "SATA Controller"<br/>
+       </div>
+
+
+<br/><br/>
+Создаю виртуальные жесткие диски. Размер (size), рекомендуется задавать согласно имеющихся ресурсов. Иначе возможны проблемы и крах виртуальной машины):
+
+
+
+
+       <div class="linuxCommand">
+	$ cd ${vm_home}/${vm}/${vm}
+       </div>
+
+<br/><br/>
+
+Если не хочется копипастить 8 раз одно и тоже, можно воспользоваться всего одной командой:
+<br/><br/>
+Создать диски 1 командой:
+<br/><br/>
+
+       <div class="linuxCommand">
+	$ for i in $(seq 1 8 )  <br/>
+do VBoxManage createhd --filename ${vm}_dsk_dsk$i.vdi --size 40960 --format VDI --variant Standard <br/>
+done
+       </div>
+
+<br/><br/>
+Подключить диски 1 командой:
+<br/><br/>
+
+       <div class="linuxCommand">
+$ for i in $(seq 1 8 )<br/>
+do VBoxManage storageattach ${vm} --storagectl "SATA Controller" --device 0 --port $i --type hdd --medium ${vm}_dsk_dsk$i.vdi<br/>
+done 
+       </div>
+
+
+<br/><br/>
+Подключаем IDE контроллер к которому будет позднее подключен DVD-ROM:
+
+<div class="linuxCommand">
+$ VBoxManage storagectl ${vm} \<br/>
+--add ide \<br/>
+--name "IDE Controller"<br/>
+</div>
+
+
+<br/><br/>
+Подключаю к IDE контроллеру DVD образ инсталлируемой операционной системы:
+
+<div class="linuxCommand">
+$ VBoxManage storageattach ${vm} \<br/>
+--storagectl "IDE Controller" \<br/>
+--port 0 \<br/>
+--device 0 \<br/>
+--type dvddrive \<br/>
+--medium /mnt/dsk2/_ISO/_Microsoft/win2k8/x64/en_windows_server_2008_with_sp2_x64_dvd_342336.iso<br/>
+</div>
+
+
+<br/><br/>
+Подключение сетевых интерфейсов:<br/>
+(Мой компьютер подключен к маршрутизатору (обычный домашний роутер). Обмен данных между моим компьютером и виртуальной машиной будет проходить через него. Если вы не используете маршрутизатор или коммутатор, вам нужно создать сетевые интерфейсы с параметром не bridget а internal connection.) 
+
+
+<br/><br/>
+Наберите команду;
+
+<div class="linuxCommand">
+$ VBoxManage list bridgedifs
+</div>
+
+<br/><br/>
+
+Обратите внимание на значение:<br/>
+Name:            eth0
+
+<br/><br/>
+Я использую eth0 как основной физический интерфейс, который будут использовать виртуальные машины в качестве моста.
+<br/><br/>
+
+
+
+Подключаю к виртуальной машине 2 виртуальных сетевых интерфеса “Intel® 82540EM Gigabit Ethernet Controller”, работающих как bridget:
+
+
+<br/><br/>
+Подключаю к IDE контроллеру DVD образ инсталлируемой операционной системы:
+
+<div class="linuxCommand">
+$ VBoxManage modifyvm ${vm} \<br/>
+--nictype1 82540EM \<br/>
+--nic1 bridged \<br/>
+--bridgeadapter1 eth0<br/>
+
+</div>
+
+
+
+<br/><br/>
+Подключаем к IDE контроллеру DVD образ инсталлируемой операционной системы:
+
+<div class="linuxCommand">
+$ VBoxManage modifyvm ${vm} \<br/>
+--nictype2 82540EM \<br/>
+--nic2 bridged \<br/>
+--bridgeadapter2 eth0<br/>
+
+</div>
+
+
+
+<br/><br/>
+ (Если планируется инсталлировать RAC, рекомендуется установить 3-й интерфейс)
+
+<div class="linuxCommand">
+$ VBoxManage modifyvm ${vm} \<br/>
+--nictype3 82540EM \<br/>
+--nic3 bridged \<br/>
+--bridgeadapter3 eth0<br/>
+
+</div>
+
+
+<br/><br/>
+Определяем порядок устройств, с которых будет произведена попытка стартовать систему
+
+<div class="linuxCommand">
+$ VBoxManage modifyvm ${vm} \<br/>
+--boot1 disk \<br/>
+--boot2 dvd<br/>
+
+</div>
+
+
+
+<br/><br/>
+Определяем каталог для снапшотов
+
+<div class="linuxCommand">
+$ VBoxManage modifyvm ${vm} \<br/>
+--snapshotfolder ${vm_home}/${vm}/snapshots<br/>
+
+</div>
+
+
+
+<br/><br/>
+Предоставим возможность подключения к машине по RDP:
+
+<div class="linuxCommand">
+$ VBoxManage modifyvm ${vm} \<br/>
+--vrde on \<br/>
+--vrdemulticon on \<br/>
+--vrdeauthtype null \<br/>
+--vrdeaddress 192.168.1.5 \<br/>
+--vrdeport 3389<br/>
+
+</div>
+
+
+
+
+<br/><br/>
+Здесь мы указываем:<br/><br/>
+
+--vrdeaddress - ip адрес машины, на которой установлен vitrualbox.<br/>
+--vrdeauthtype null - аутентификация не требуется.<br/>
+--vrdemulticon on - разрешено множественное подключение к виртуальным машинам.<br/>
+--vrdeport порт к которому можно будет подключиться при старте виртуальной машины.
+<br/>
+
+
+<br/><br/>
+Создание снапшота перед инсталляцией ОС
+<br/><br/>
+<div class="linuxCommand">
+$ VBoxManage snapshot ${vm} take before_os_installation
+</div>
+
+
+<br/><br/>
+ВИРТУАЛЬНАЯ МАШИНА ГОТОВА ДЛЯ ИНСТАЛЛЯЦИИ ОПЕРАЦИОННОЙ СИСТЕМЫ
+<br/><br/>
+
+
+<br/><br/>
+Показать результат созданной виртаульной машины:
+
+<div class="linuxCommand">
+$ VBoxManage showvminfo ${vm}  | less
+</div>
+
+
+
+<br/><br/>
+Стартуем виртуальную машину с возможность подключения по RDP
+
+<div class="linuxCommand">
+$ VBoxHeadless --startvm ${vm} 
+</div>
+
+
+
+<br/><br/>
+Посмотреть стартованные виртуальные машины можно командой
+
+<div class="linuxCommand">
+$ vboxmanage list runningvms
+</div>
+
+
+
+<br/><br/>
+Если работаете в linux, подключиться к виртуальной машине можно с помощью rdesktop
+
+<div class="linuxCommand">
+$ rdesktop \<br/>
+-r sound:local \<br/>
+-k common  \<br/>
+-g  1600x1024 \<br/>
+192.168.1.5:3389<br/>
+</div>
+
+
+
+
+<br/><br/>
+Если нужно подключиться с определенной “геометрией”, используйте параметр<br/>
+-g  1600x1024
+
+<br/><br/>
+Если нужно работать в полноэкранном режиме, нужно убрать ключ -g и заменить его ключом -f <br/>
+Для выхода из полноэкранного режима - CTRL+ALT+ENTER
+
+
+<br/><br/>
+rdesktop - всевозможные ключи:<br/>
+http://manpages.ubuntu.com/manpages/lucid/man1/rdesktop.1.html<br/>
+
+<br/><br/>
+В Windows для этого вполне подойдет Remote Desktop Connecton (mstsc.exe). В Linux есть аналогичная программа для подключения к удаленным рабочим столам - Remmina. 
+
+<br/><br/>
+
+
+
+
+<br/><br/>
+
+Более подробный документ с созданием снапшотов и резервных коиий виртуальных машин:<br/>
+https://docs.google.com/document/d/1ZU6Hk5DYitFYwlRFqN2qmJr6maPpvgsVc6ZTiZ1kYVA/edit
+
+
+</div>
+</div>
+<br/><br/><br/>
+
+
+
+
+</div>	
+</div>		
+		
+	
+
+
+
+
+
+<br/><br/>
+<hr>
+<br/>
+
+<div align="center">
+	<a href="index.html"><h3>Oracle DBA</h3></a>
+</div>
+
+	<div align="center">
+		<strong>tags:</strong> <a href="index.html">Oracle Linux</a> || 
+		<a href="sitemap.php.html">Oracle DataBase</a> ||
+		<a href="sitemap.php.html">Oracle Weblogic</a> || 
+		<a href="http://plsql.ru/">SQL & PL/SQL</a> || 
+ 		<a href="http://javadev.ru/">Java</a> || 
+ 		<a href="http://oracle-adf.ru/">Oracle ADF</a>
+	</div>
+
+	
+	<div align="center">
+		Исходные коды сайта oracle-dba.ru на <a href="https://github.com/plsql/oracle-dba.ru">github</a>
+	</div>
+
+
+<!---------------->
+<!-- Page Info  -->
+
+<!-- Эта страница была загружена с сайта: -->
+<!-- http://prev.oracle-dba.ru/vm_vitrualbox_for_oracle_database_windows_2008.php -->
+
+<!----------------------->
+<!-- Google Analinics  -->
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-4894954-13']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+
+<!-- Google Analinics  -->
+<!----------------------->
+
+<!-- Дата обращения к странице -->
+<!-- 05/08/2015 -->
+
+<!--/ Page Info  -->
+<!---------------->
+
+
+
+
+
+</body>
+
+</html>

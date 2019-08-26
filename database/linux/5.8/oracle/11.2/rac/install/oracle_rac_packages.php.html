@@ -1,0 +1,434 @@
+﻿<html>
+
+
+
+<head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta name="keywords" content="Oracle DBA, RAC, ASM, DataGuard"/>
+	<meta name="description" content="Администрирование и разработка баз данных Oracle"/>
+
+		<title>Oracle DBA</title>
+
+		 <link rel="stylesheet" href="http://prev.oracle-dba.ru/database/linux/5.8/oracle/11.2/rac/install/hb.css" type="text/css">
+		 <link rel="stylesheet" href="http://prev.oracle-dba.ru/database/linux/5.8/oracle/11.2/rac/install/html.css" type="text/css">
+
+
+
+                  <link rel="stylesheet" href="../../../../../../../css/bootstrap.css">
+                  <link rel="stylesheet" href="../../../../../../../css/app.css">
+
+
+
+				<style type="text/css">
+				   .text {
+
+					padding-left: 100px;
+					padding-right: 100px;
+
+				   }
+
+				   .link {
+
+					padding-left: 100px;
+					padding-right: 100px;
+
+				   }
+
+				</style>
+
+
+        <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'oracle-dba'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function () {
+            var s = document.createElement('script'); s.async = true;
+            s.type = 'text/javascript';
+            s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+        </script>
+
+
+
+<style type="text/css">
+ .spoiler_body {display:none; cursor:pointer;}
+</style>
+
+
+	</head>
+
+
+<body>
+
+
+
+
+<br/><br/>
+
+<div class="link">
+<table width="100%" border="0">
+<tr>
+<td align="left" width="40%">
+<a href="../../../../../../../index.html"><img src="../../../../../../../remote_oracle_dba.jpeg" border="0" alt="Oracle DBA"
+/></a>
+</td>
+
+
+<td align="center">
+<a href="../../../../../../../chat.php.html">Заходи в WEBCHAT админов Oracle<br/>
+Здесь старый добрый IRC</a>
+</td>
+
+<td align="right" width="33%">
+<a href="../../../../../../../job/remote_oracle_dba_on_project/index.html"><img src="../../../../../../../remote-oracle-dba-services.jpg" border="0"
+alt="Remote Oracle DBA Services"
+height="" width="300px" /></a>
+</td>
+
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+
+
+<div id="cse" style="width: 100%;">Loading</div>
+<script src="http://www.google.ru/jsapi" type="text/javascript"></script>
+<script type="text/javascript">
+  google.load('search', '1', {language : 'ru', style : google.loader.themes.V2_DEFAULT});
+  google.setOnLoadCallback(function() {
+    var customSearchOptions = {};  var customSearchControl = new google.search.CustomSearchControl(
+      '006168197569183510807:fzridi5qcxw', customSearchOptions);
+    customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+    customSearchControl.draw('cse');
+  }, true);
+</script>
+
+
+<div align="center" style="color:red">
+Работа над этой версией сайта остановлена. Рекомендуется обратиться к новой версии сайта <a href="http://oracle-dba.ru">oracle-dba.ru</a> на котором в дальшейшем будут исправляться все ошибки и неточности.
+</div>
+
+<br/>
+
+<div align="center">
+<a href="../../../../../../../sitemap.php.html">Карта сайта</a>
+</div>
+
+
+
+<br/><br/><br/>
+<h2><a href="index.php.html">[Инсталляция Oracle RAC 11.2 на Oracle Linux 5.8]</a>: Инсталляция необходимых пакетов</h2>
+
+
+<span style="font-size: 20px; text-align: left; line-height: 130%; font-family: Arial,Helvetica,sans-serif; color: rgb(153, 0, 0);">
+<strong>Добавляем репозиторий для инсталляции пакетов</strong></span>
+
+<br/><br/>
+
+<table cellpadding="4" cellspacing="2" align="center" border="0" width="98%">
+<tbody>
+
+<tr>
+<td style="color: rgb(255, 255, 255);" bgcolor="#386351" width="14%"><span style="font-family: Arial,Helvetica,sans-serif; font-size: 14px;"><strong>Server:</strong></span></td>
+<td height="20" bgcolor="#a2bcb1" width="60%"><span style="font-family: Arial,Helvetica,sans-serif; font-size: 14px;"><strong>node1, node2, storage</strong></span></td>
+<td rowspan="3" align="center" valign="middle" width="26%"></td>
+</tr>
+
+</table>
+
+
+
+<br/><br/>
+
+# vi /etc/yum.repos.d/oracleLinuxRepoINTERNET.repo
+
+<br/><br/>
+
+<pre>
+[OEL_INTERNET]
+name=Oracle Enterprise Linux $releasever - $basearch
+baseurl=http://public-yum.oracle.com/repo/OracleLinux/OL5/latest/x86_64/
+gpgkey=http://public-yum.oracle.com/RPM-GPG-KEY-oracle-el5
+gpgcheck=1
+enabled=1
+
+</pre>
+
+<br/><br/>
+<strong># yum repolist</strong>
+
+
+
+
+<span style="font-size: 20px; text-align: left; line-height: 130%; font-family: Arial,Helvetica,sans-serif; color: rgb(153, 0, 0);">
+<strong>Инсталляция необходимых пакетов</strong></span>
+
+<br/><br/>
+
+<table cellpadding="4" cellspacing="2" align="center" border="0" width="98%">
+<tbody>
+
+<tr>
+<td style="color: rgb(255, 255, 255);" bgcolor="#386351" width="14%"><span style="font-family: Arial,Helvetica,sans-serif; font-size: 14px;"><strong>Server:</strong></span></td>
+<td height="20" bgcolor="#a2bcb1" width="60%"><span style="font-family: Arial,Helvetica,sans-serif; font-size: 14px;"><strong>node1, node2 и storage</strong></span></td>
+<td rowspan="3" align="center" valign="middle" width="26%"></td>
+</tr>
+
+</table>
+
+
+
+<pre>
+
+
+# yum install -y \
+mc \
+nano \
+gcc \
+make \
+openssh-clients \
+wget \
+xinetd \
+screen \
+vsftpd \
+gamin \
+unzip \
+ntp \
+net-snmp \
+ntsysv
+
+</pre>
+
+<table cellpadding="4" cellspacing="2" align="center" border="0" width="98%">
+<tbody>
+
+<tr>
+<td style="color: rgb(255, 255, 255);" bgcolor="#386351" width="14%"><span style="font-family: Arial,Helvetica,sans-serif; font-size: 14px;"><strong>Server:</strong></span></td>
+<td height="20" bgcolor="#a2bcb1" width="60%"><span style="font-family: Arial,Helvetica,sans-serif; font-size: 14px;"><strong>node1, node2</strong></span></td>
+<td rowspan="3" align="center" valign="middle" width="26%"></td>
+</tr>
+
+</table>
+
+<pre>
+
+Следующие пакеты или более поздние должны быть установлены в OEL 5.x:
+
+binutils-2.17.50.0.6
+compat-libstdc++-33-3.2.3
+compat-libstdc++-33-3.2.3 (32 bit)
+elfutils-libelf-0.125
+elfutils-libelf-devel-0.125
+gcc-4.1.2
+gcc-c++-4.1.2
+glibc-2.5-24
+glibc-2.5-24 (32 bit)
+glibc-common-2.5
+glibc-devel-2.5
+glibc-devel-2.5 (32 bit)
+glibc-headers-2.5
+ksh-20060214
+libaio-0.3.106
+libaio-0.3.106 (32 bit)
+libaio-devel-0.3.106
+libaio-devel-0.3.106 (32 bit)
+libgcc-4.1.2
+libgcc-4.1.2 (32 bit)
+libstdc++-4.1.2
+libstdc++-4.1.2 (32 bit)
+libstdc++-devel 4.1.2
+make-3.81
+sysstat-7.0.2
+
+
+Следующие пакеты или более поздние должны быть установлены в OEL 6.x:
+
+binutils-2.20.51.0.2-5.11.el6 (x86_64)
+compat-libcap1-1.10-1 (x86_64)
+compat-libstdc++-33-3.2.3-69.el6 (x86_64)
+compat-libstdc++-33-3.2.3-69.el6.i686
+gcc-4.4.4-13.el6 (x86_64)
+gcc-c++-4.4.4-13.el6 (x86_64)
+glibc-2.12-1.7.el6 (i686)
+glibc-2.12-1.7.el6 (x86_64)
+glibc-devel-2.12-1.7.el6 (x86_64)
+glibc-devel-2.12-1.7.el6.i686
+ksh
+libgcc-4.4.4-13.el6 (i686)
+libgcc-4.4.4-13.el6 (x86_64)
+libstdc++-4.4.4-13.el6 (x86_64)
+libstdc++-4.4.4-13.el6.i686
+libstdc++-devel-4.4.4-13.el6 (x86_64)
+libstdc++-devel-4.4.4-13.el6.i686
+libaio-0.3.107-10.el6 (x86_64)
+libaio-0.3.107-10.el6.i686
+libaio-devel-0.3.107-10.el6 (x86_64)
+libaio-devel-0.3.107-10.el6.i686
+make-3.81-19.el6
+sysstat-9.0.4-11.el6 (x86_64)
+
+
+WARNING:
+PRVF-7584 : Multiple versions of package "elfutils-libelf-devel" found on node node2: elfutils-libelf-devel(x86_64)-0.137-3.el5,elfutils-libelf-devel(i386)-0.137-3.el5
+
+
+
+
+# yum install -y \
+binutils \
+compat-libstdc++*33* \
+elfutils-libelf \
+elfutils-libelf-devel \
+elfutils-libelf-devel-static \
+gcc \
+gcc-c++ \
+glibc \
+glibc-common \
+glibc-devel \
+glibc-headers \
+kernel-headers \
+libaio \
+libaio-devel \
+libgcc \
+libgomp \
+libstdc++ \
+libstdc++-devel \
+make \
+numactl-devel \
+sysstat \
+libXext.x86_64 \
+compat-libstdc++* \
+readline-devel.x86_64
+
+
+
+
+// И вот эти пакеты:
+
+# yum install -y \
+unixODBC.i386 \
+unixODBC.x86_64 \
+unixODBC-devel.i386 \
+unixODBC-devel.x86_64
+
+
+
+rlwrap - пакет, который позволяет хранить историю команд в SQL*PLUS и RMAN в Linux (его необходимо прописывать отдельной строкой в bash профиле). Установив данный пакет, вы сможете использовать кнопки вверх, вниз для просмотра истории введенных команд, правильную работу команды backspace и др.
+
+# cd /tmp
+# wget http://utopia.knoware.nl/~hlub/uck/rlwrap/rlwrap-0.37.tar.gz
+
+# tar zxvf rlwrap-0.37.tar.gz
+# cd rlwrap-0.37
+# ./configure
+# make
+# make check
+# make install
+
+
+
+</pre>
+
+
+<br/><br/>
+<hr/>
+<br/><br/>
+
+
+
+          <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = 'oracle-dba'; // required: replace example with your forum shortname
+
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+
+
+
+<br/><br/>
+<br/><br/>
+
+
+</div>
+
+
+
+
+
+
+
+<br/><br/>
+<hr>
+<br/>
+
+<div align="center">
+	<a href="../../../../../../../index.html"><h3>Oracle DBA</h3></a>
+</div>
+
+	<div align="center">
+		<strong>tags:</strong> <a href="../../../../../../../index.html">Oracle Linux</a> || 
+		<a href="../../../../../../../sitemap.php.html">Oracle DataBase</a> ||
+		<a href="../../../../../../../sitemap.php.html">Oracle Weblogic</a> || 
+		<a href="http://plsql.ru/">SQL & PL/SQL</a> || 
+ 		<a href="http://javadev.ru/">Java</a> || 
+ 		<a href="http://oracle-adf.ru/">Oracle ADF</a>
+	</div>
+
+	
+	<div align="center">
+		Исходные коды сайта oracle-dba.ru на <a href="https://github.com/plsql/oracle-dba.ru">github</a>
+	</div>
+
+
+<!---------------->
+<!-- Page Info  -->
+
+<!-- Эта страница была загружена с сайта: -->
+<!-- http://prev.oracle-dba.ru/database/linux/5.8/oracle/11.2/rac/install/oracle_rac_packages.php -->
+
+<!----------------------->
+<!-- Google Analinics  -->
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-4894954-13']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+
+<!-- Google Analinics  -->
+<!----------------------->
+
+<!-- Дата обращения к странице -->
+<!-- 05/08/2015 -->
+
+<!--/ Page Info  -->
+<!---------------->
+
+
+
+
+
+</body>
+
+</html>

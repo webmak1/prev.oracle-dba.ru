@@ -1,0 +1,573 @@
+﻿<html>
+
+
+
+<head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta name="keywords" content="Oracle DBA, RAC, ASM, DataGuard"/>
+	<meta name="description" content="Администрирование и разработка баз данных Oracle"/>
+
+		<title>Oracle DBA</title>
+
+		 <link rel="stylesheet" href="http://prev.oracle-dba.ru/database/linux/6.4/oracle/12.1/install/hb.css" type="text/css">
+		 <link rel="stylesheet" href="http://prev.oracle-dba.ru/database/linux/6.4/oracle/12.1/install/html.css" type="text/css">
+
+
+
+                  <link rel="stylesheet" href="../../../../../../css/bootstrap.css">
+                  <link rel="stylesheet" href="../../../../../../css/app.css">
+
+
+
+				<style type="text/css">
+				   .text {
+
+					padding-left: 100px;
+					padding-right: 100px;
+
+				   }
+
+				   .link {
+
+					padding-left: 100px;
+					padding-right: 100px;
+
+				   }
+
+				</style>
+
+
+        <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'oracle-dba'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function () {
+            var s = document.createElement('script'); s.async = true;
+            s.type = 'text/javascript';
+            s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+        </script>
+
+
+
+<style type="text/css">
+ .spoiler_body {display:none; cursor:pointer;}
+</style>
+
+
+	</head>
+
+
+<body>
+
+
+
+
+<br/><br/>
+
+<div class="link">
+<table width="100%" border="0">
+<tr>
+<td align="left" width="40%">
+<a href="../../../../../../index.html"><img src="../../../../../../remote_oracle_dba.jpeg" border="0" alt="Oracle DBA"
+/></a>
+</td>
+
+
+<td align="center">
+<a href="../../../../../../chat.php.html">Заходи в WEBCHAT админов Oracle<br/>
+Здесь старый добрый IRC</a>
+</td>
+
+<td align="right" width="33%">
+<a href="../../../../../../job/remote_oracle_dba_on_project/index.html"><img src="../../../../../../remote-oracle-dba-services.jpg" border="0"
+alt="Remote Oracle DBA Services"
+height="" width="300px" /></a>
+</td>
+
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+
+
+<div id="cse" style="width: 100%;">Loading</div>
+<script src="http://www.google.ru/jsapi" type="text/javascript"></script>
+<script type="text/javascript">
+  google.load('search', '1', {language : 'ru', style : google.loader.themes.V2_DEFAULT});
+  google.setOnLoadCallback(function() {
+    var customSearchOptions = {};  var customSearchControl = new google.search.CustomSearchControl(
+      '006168197569183510807:fzridi5qcxw', customSearchOptions);
+    customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+    customSearchControl.draw('cse');
+  }, true);
+</script>
+
+
+<div align="center" style="color:red">
+Работа над этой версией сайта остановлена. Рекомендуется обратиться к новой версии сайта <a href="http://oracle-dba.ru">oracle-dba.ru</a> на котором в дальшейшем будут исправляться все ошибки и неточности.
+</div>
+
+<br/>
+
+<div align="center">
+<a href="../../../../../../sitemap.php.html">Карта сайта</a>
+</div>
+
+
+
+<br/><br/><br/>
+<h2><a href="index.php.html">[Инсталляция Oracle 12.1]</a>: Конфигурурование системных пользователей, настройка параметров системы</h2>
+
+<br/><br/>
+
+
+
+Перед тем как вносить изменения в конфигурационные файлы, рекомедуется сделать их резервные копии:
+
+<br/><br/>
+
+       <div class="linuxCommand">
+
+		# {<br/>
+		cp /etc/sysctl.conf /etc/sysctl.conf.bkp<br/>
+		cp /etc/security/limits.conf /etc/security/limits.conf.bkp<br/>
+		cp /etc/pam.d/login /etc/pam.d/login.bkp<br/>
+		cp /etc/profile /etc/profile.bkp<br/>
+		}<br/>
+
+       </div>
+
+
+
+<br/><br/>
+
+
+Создание пользователей и групп
+
+<br/><br/>
+
+Создаем группы:
+
+<br/><br/>
+
+
+       <div class="linuxCommand">
+
+		# groupadd -g 1000 oinstall<br/>
+		# groupadd -g 1001 dba<br/>
+		# groupadd -g 1002 oper<br/>
+
+       </div>
+
+
+<br/><br/>
+
+
+Создаем пользователя oracle, сообщаем, что он будет находиться в группах dba и oinstall и домашним каталогом у него будет /home/oracle
+
+<br/><br/>
+
+
+<br/><br/>
+
+
+       <div class="linuxCommand">
+
+		# useradd \<br/>
+		-g oinstall \<br/>
+		-G dba \<br/>
+		-d /home/oracle \<br/>
+		-m oracle<br/>
+
+       </div>
+
+
+<br/><br/>
+
+
+Устанавливаем пароль для пользователе oracle12<br/><br/>
+
+       <div class="linuxCommand">
+
+		# passwd oracle<br/>
+
+       </div>
+
+
+
+<br/><br/>
+
+Изменение параметров ядра и параметров учетной записи с правами администратора базы данных
+
+<br/><br/>
+
+1) Отредактируйте файл  /etc/sysctl.conf
+
+<br/><br/>
+
+
+Рекомендуется закомментировать (поставить перед ними знак #) имеющиеся параметры kernel.shmmax и kernel.shmall. Далее они будут добавлены в качестве параметров вместе с остальными параметрами Oracle. Для этого выполните следующие команды:
+
+<br/><br/>
+
+
+
+
+       <div class="linuxCommand">
+
+
+		# sed -i.gres "s/kernel.shmmax/#kernel.shmmax/g" /etc/sysctl.conf<br/>
+		# sed -i.gres "s/kernel.shmall/#kernel.shmall/g" /etc/sysctl.conf<br/>
+
+       </div>
+
+
+<br/><br/>
+
+
+       <div class="linuxCommand">
+
+		# vi /etc/sysctl.conf<br/>
+
+       </div>
+
+
+<br/><br/>
+
+		kernel.shmmax = RAM (in bytes) / 2<br/>
+
+<br/><br/>
+
+
+Количество байт отперативной памяти, можно узнать командой
+
+<br/><br/>
+       <div class="linuxCommand">
+
+		# free -b<br/>
+
+       </div>
+
+4152623104 / 2 = 2076311552
+
+<br/><br/>
+
+
+Добавьте в конец файла /etc/sysctl.conf следующие параметры ядра.
+
+
+
+
+<br/><br/>
+       <div class="fileContent"><br/>
+		############################################<br/>
+		#### Kernel Parameters for Oracle 12 <br/><br/>
+
+		&emsp;&emsp;&emsp;  		kernel.sem = 250 32000 100 128<br/>
+		&emsp;&emsp;&emsp;		kernel.shmall = 2097152<br/>
+		&emsp;&emsp;&emsp;		kernel.shmmax = 2076311552<br/>
+		&emsp;&emsp;&emsp;		kernel.shmmni = 4096<br/>
+		&emsp;&emsp;&emsp;		fs.file-max = 6815744<br/>
+		&emsp;&emsp;&emsp;		fs.aio-max-nr = 1048576<br/>
+		&emsp;&emsp;&emsp;		net.ipv4.ip_local_port_range = 20000 65500<br/>
+		&emsp;&emsp;&emsp;		net.core.rmem_default = 262144<br/>
+		&emsp;&emsp;&emsp;		net.core.rmem_max = 4194304<br/>
+		&emsp;&emsp;&emsp;		net.core.wmem_default = 262144<br/>
+		&emsp;&emsp;&emsp;		net.core.wmem_max = 1048586<br/>
+		&emsp;&emsp;&emsp;		vm.min_free_kbytes = 23168<br/><br/>
+
+		############################################<br/><br/>
+	</div>
+
+
+<br/><br/>
+
+
+2) Отредактируйте файл  /etc/security/limits.conf<br/><br/>
+
+
+
+       <div class="linuxCommand">
+
+		# vi /etc/security/limits.conf<br/>
+
+       </div>
+
+<br/><br/>
+Добавьте следующие строки
+
+<br/><br/>
+
+       <div class="fileContent"><br/>
+		############################################<br/>
+		#### Settings required for Oracle<br/><br/>
+
+		&emsp;&emsp;&emsp;		oracle soft nproc 2047<br/>
+		&emsp;&emsp;&emsp;		oracle hard nproc 16384<br/>
+		&emsp;&emsp;&emsp;		oracle soft nofile 1024<br/>
+		&emsp;&emsp;&emsp;		oracle hard nofile 65536<br/>
+		&emsp;&emsp;&emsp;		oracle soft stack 10240<br/>
+		&emsp;&emsp;&emsp;		oracle hard stack 32768<br/><br/>
+
+		############################################<br/><br/>
+	</div>
+
+
+
+<br/><br/>
+
+3) Отредактируйте файл  /etc/pam.d/login
+
+<br/><br/>
+
+       <div class="linuxCommand">
+
+		# vi /etc/pam.d/login<br/>
+
+       </div>
+
+<br/><br/>
+
+Добавьте следующие строки
+
+<br/><br/>
+
+       <div class="fileContent"><br/>
+############################################<br/>
+#### Settings required for Oracle<br/><br/>
+
+&emsp;&emsp;&emsp;    session required pam_limits.so<br/>
+############################################<br/><br/>
+</div>
+
+
+<br/><br/>
+
+
+4) Отредактируйте файл /etc/profile
+
+<br/><br/>
+
+
+       <div class="linuxCommand">
+
+		# vi /etc/profile<br/>
+
+       </div>
+
+<br/><br/>
+
+Перед<br/><br/>
+
+unset i<br/>
+unset pathmunge<br/>
+
+
+<br/><br/>
+Добавьте
+
+<br/><br/>
+
+
+       <div class="fileContent"><br/>
+############################################<br/>
+#### Shell limits for Oracle user accounts<br/><br/>
+
+&emsp;&emsp;&emsp;        if [ $USER = "oracle" ]; then<br/>
+&emsp;&emsp;&emsp;        ulimit -u 16384 -n 65536<br/>
+&emsp;&emsp;&emsp;        fi<br/>
+############################################<br/><br/>
+
+</div>
+
+
+
+<br/><br/>
+
+
+5) Отредактируйте файл /home/oracle/.bash_profile
+
+
+<br/><br/>
+
+       <div class="linuxCommand">
+
+		#  vi /home/oracle/.bash_profile<br/>
+
+       </div>
+
+
+<br/><br/>
+
+После;  <br/>
+# User specific environment and startup programs
+
+<br/><br/>
+
+Добавьте
+
+
+<br/><br/>
+
+
+       <div class="fileContent"><br/>
+	############################################<br/>
+	#### Oracle Parameters<br/><br/>
+
+&emsp;&emsp;&emsp;	    umask 022<br/><br/>
+
+&emsp;&emsp;&emsp;	    export ORACLE_BASE=/u01/oracle<br/>
+&emsp;&emsp;&emsp;	    export ORACLE_HOME=$ORACLE_BASE/database/12.1<br/>
+&emsp;&emsp;&emsp;	    export ORACLE_SID=orcl<br/>
+&emsp;&emsp;&emsp;	    export ORACLE_UNQNAME=orcl<br/>
+&emsp;&emsp;&emsp;	    export NLS_LANG=AMERICAN_AMERICA.AL32UTF8<br/>
+&emsp;&emsp;&emsp;	    export NLS_DATE_FORMAT="DD.MM.YYYY HH24:MI:SS"<br/><br/>
+
+&emsp;&emsp;&emsp;	    export PATH=$PATH:$ORACLE_HOME/bin<br/>
+&emsp;&emsp;&emsp;	    export LD_LIBRARY_PATH=$ORACLE_HOME/lib<br/>
+
+&emsp;&emsp;&emsp;		   alias sqlplus='rlwrap sqlplus'<br/>
+&emsp;&emsp;&emsp;		   alias rman='rlwrap rman'<br/><br/>
+
+	############################################<br/><br/>
+
+       </div>
+
+<br/><br/>
+
+
+
+Применить параметры ядра без перезагрузки можно следующей командой:
+
+<br/><br/>
+
+       <div class="linuxCommand">
+
+		# sysctl -p<br/>
+
+       </div>
+
+
+<br/><br/>
+
+
+Применить переменные, определенные в файле .bash_profile к текущей сессии bash можно следующей командой:
+
+<br/><br/>
+
+       <div class="linuxCommand">
+
+		# source ~/.bash_profile<br/>
+
+       </div>
+
+
+<br/><br/>
+
+</pre>
+
+
+
+<br/><br/>
+<hr/>
+<br/><br/>
+
+
+
+          <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = 'oracle-dba'; // required: replace example with your forum shortname
+
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+
+
+
+<br/><br/>
+<br/><br/>
+
+
+</div>
+
+
+
+
+
+
+
+<br/><br/>
+<hr>
+<br/>
+
+<div align="center">
+	<a href="../../../../../../index.html"><h3>Oracle DBA</h3></a>
+</div>
+
+	<div align="center">
+		<strong>tags:</strong> <a href="../../../../../../index.html">Oracle Linux</a> || 
+		<a href="../../../../../../sitemap.php.html">Oracle DataBase</a> ||
+		<a href="../../../../../../sitemap.php.html">Oracle Weblogic</a> || 
+		<a href="http://plsql.ru/">SQL & PL/SQL</a> || 
+ 		<a href="http://javadev.ru/">Java</a> || 
+ 		<a href="http://oracle-adf.ru/">Oracle ADF</a>
+	</div>
+
+	
+	<div align="center">
+		Исходные коды сайта oracle-dba.ru на <a href="https://github.com/plsql/oracle-dba.ru">github</a>
+	</div>
+
+
+<!---------------->
+<!-- Page Info  -->
+
+<!-- Эта страница была загружена с сайта: -->
+<!-- http://prev.oracle-dba.ru/database/linux/6.4/oracle/12.1/install/oracle_kernel_parameters.php -->
+
+<!----------------------->
+<!-- Google Analinics  -->
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-4894954-13']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+
+<!-- Google Analinics  -->
+<!----------------------->
+
+<!-- Дата обращения к странице -->
+<!-- 05/08/2015 -->
+
+<!--/ Page Info  -->
+<!---------------->
+
+
+
+
+
+</body>
+
+</html>
